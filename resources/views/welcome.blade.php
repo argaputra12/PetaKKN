@@ -5,7 +5,10 @@
     {{-- Header --}}
     <x-slot name="header">
         {{-- Background --}}
-        <img src="{{ asset('img/uns.png') }}" alt="uns-image" class="w-full absolute  bg-center mx-auto left-0 z-0 opacity-60">
+        <div class="bg-black absolute w-full left-0">
+            <img src="{{ asset('img/uns.png') }}" alt="uns-image" class="w-full  bg-center mx-auto left-0 z-0 opacity-60">
+
+        </div>
 
         <div class="title pt-16">
             <h1 class="font-bold text-5xl w-1/3 leading-relaxed text-primary-textlight z-10 relative">
@@ -19,121 +22,28 @@
             </h2>
         </div>
 
-        <div class="pt-12 relative z-10">
+        {{-- <div class="pt-12 relative z-10">
             <button onclick="scrollToLokasi()" class="font-semibold text-primary-textlight bg-primary-red w-36 h-10 text-lg rounded-xl">
                 Lokasi KKN
             </button>
-        </div>
+        </div> --}}
+        <form action="{{ route('location.index') }}" method="post" class="pt-12 relative z-10">
+            <select name="id" id="" class="rounded-xl h-12 bg-opacity-50">
+                <option value="" >Pilih Lokasi</option>
+                @foreach ($locations as $location)
+                    <option value="{{ $location->id }}">{{ $location->nama }}</option>
+                @endforeach
+            </select>
+            <button type="submit" class="font-semibold text-primary-textlight bg-primary-red w-40 h-12 ml-4 text-lg rounded-xl" >
+                Pilih Lokasi KKN
+            </button>
+        </form>
 
     </x-slot>
 
 
     {{-- Jumbotron --}}
-    <div class="jumbotron text-primary-textdark bg-primary-textlight px-8 pt-16 h-[100vh]" id="lokasi_kkn">
-        <div class="content max-w-7xl mx-auto">
-            <h1 class="font-semibold text-4xl mb-16 text-center">Pemetaan Kota Lokasi KKN UNS 2022</h1>
 
-            {{-- Content --}}
-            <div class="flex w-full justify-between flex-wrap text-primary-textdark">
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="SURAKARTA">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >SURAKARTA</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="SUKOHARJO">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >SUKOHARJO</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="BOYOLALI">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >BOYOLALI</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="KARANGANYAR">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >KARANGANYAR</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="SRAGEN">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >SRAGEN</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="WONOGIRI">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >WONOGIRI</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="KLATEN">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >KLATEN</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="MAGETAN">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >MAGETAN</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="NGAWI">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >NGAWI</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="MAGELANG">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >MAGELANG</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="KEBUMEN">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >KEBUMEN</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="PACITAN">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >PACITAN</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="GROBOGAN">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >GROBOGAN</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="BREBES">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >BREBES</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="CILACAP">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >CILACAP</button>
-                    </form>
-                </div>
-                <div class="btn-container basis-[24%]">
-                    <form method="post" action="{{ route('location.index') }}">
-                        <input type="hidden" name="location" value="PANGANDARAN">
-                        <button type="submit" class="bg-primary-cream mb-10 w-[200px] h-10 rounded-xl font-semibold text-xl " >PANGANDARAN</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <script>

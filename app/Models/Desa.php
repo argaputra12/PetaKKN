@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Location extends Model
+class Desa extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'provinsi', 'kota_id', 'kelompok_id', 'js_coordinates'
+        'nama_desa',
+        'nama_kecamatan',
+        'kota_id'
     ];
 
-    public function kelompoks(){
-        return $this->belongsTo(Kelompok::class);
-    }
-
-    public function kotas(){
+    public function kota(){
         return $this->belongsTo(Kota::class);
     }
 }

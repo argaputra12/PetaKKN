@@ -36,6 +36,7 @@ trait InstallsApiStack
 
         // Providers...
         $files->copyDirectory(__DIR__.'/../../stubs/api/App/Providers', app_path('Providers'));
+        $this->replaceInFile("HOME = '/home'", "HOME = '/dashboard'", app_path('Providers/RouteServiceProvider.php'));
 
         // Routes...
         copy(__DIR__.'/../../stubs/api/routes/api.php', base_path('routes/api.php'));
@@ -69,7 +70,7 @@ trait InstallsApiStack
         // Cleaning...
         $this->removeScaffoldingUnnecessaryForApis();
 
-        $this->info('Breeze scaffolding installed successfully.');
+        $this->components->info('Breeze scaffolding installed successfully.');
     }
 
     /**

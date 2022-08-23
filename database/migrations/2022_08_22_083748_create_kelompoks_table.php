@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('locations', function (Blueprint $table) {
+        Schema::create('kelompoks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('kota_id');
-            $table->foreign('kota_id')->references('id')->on('kotas');
-            $table->unsignedBigInteger('kelompok_id');
-            $table->foreign('kelompok_id')->references('id')->on('kelompoks');
-            $table->string('js_coordinates');
+            $table->string('identitas_kelompok');
+            $table->string('nama_ketua')->nullable();
+            $table->string('link_sosmed')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locations');
+        Schema::dropIfExists('kelompoks');
     }
 };

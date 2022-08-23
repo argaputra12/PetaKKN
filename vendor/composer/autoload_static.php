@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
+class ComposerStaticInitb688e4d3d9631586defe01f1b1d7824d
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -530,7 +530,6 @@ class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
         'App\\Http\\Controllers\\Auth\\RegisteredUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisteredUserController.php',
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
-        'App\\Http\\Controllers\\KelompokController' => __DIR__ . '/../..' . '/app/Http/Controllers/KelompokController.php',
         'App\\Http\\Controllers\\LocationController' => __DIR__ . '/../..' . '/app/Http/Controllers/LocationController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -540,11 +539,14 @@ class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
+        'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
+        'App\\Models\\Desa' => __DIR__ . '/../..' . '/app/Models/Desa.php',
         'App\\Models\\Kelompok' => __DIR__ . '/../..' . '/app/Models/Kelompok.php',
         'App\\Models\\Kota' => __DIR__ . '/../..' . '/app/Models/Kota.php',
-        'App\\Models\\Location' => __DIR__ . '/../..' . '/app/Models/Location.php',
+        'App\\Models\\Lokasi' => __DIR__ . '/../..' . '/app/Models/Lokasi.php',
+        'App\\Models\\Proker' => __DIR__ . '/../..' . '/app/Models/Proker.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -659,12 +661,8 @@ class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
-        'Database\\Factories\\KelompokFactory' => __DIR__ . '/../..' . '/database/factories/KelompokFactory.php',
-        'Database\\Factories\\LocationFactory' => __DIR__ . '/../..' . '/database/factories/LocationFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
-        'Database\\Seeders\\KelompokSeeder' => __DIR__ . '/../..' . '/database/seeders/KelompokSeeder.php',
-        'Database\\Seeders\\LocationSeeder' => __DIR__ . '/../..' . '/database/seeders/LocationSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
         'DeepCopy\\Exception\\PropertyException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',
@@ -1736,6 +1734,7 @@ class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
         'Illuminate\\Contracts\\Broadcasting\\Broadcaster' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Broadcasting/Broadcaster.php',
         'Illuminate\\Contracts\\Broadcasting\\Factory' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Broadcasting/Factory.php',
         'Illuminate\\Contracts\\Broadcasting\\HasBroadcastChannel' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Broadcasting/HasBroadcastChannel.php',
+        'Illuminate\\Contracts\\Broadcasting\\ShouldBeUnique' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Broadcasting/ShouldBeUnique.php',
         'Illuminate\\Contracts\\Broadcasting\\ShouldBroadcast' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Broadcasting/ShouldBroadcast.php',
         'Illuminate\\Contracts\\Broadcasting\\ShouldBroadcastNow' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Broadcasting/ShouldBroadcastNow.php',
         'Illuminate\\Contracts\\Bus\\Dispatcher' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Bus/Dispatcher.php',
@@ -1869,6 +1868,7 @@ class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
         'Illuminate\\Database\\Connectors\\PostgresConnector' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Connectors/PostgresConnector.php',
         'Illuminate\\Database\\Connectors\\SQLiteConnector' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Connectors/SQLiteConnector.php',
         'Illuminate\\Database\\Connectors\\SqlServerConnector' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Connectors/SqlServerConnector.php',
+        'Illuminate\\Database\\Console\\DatabaseInspectionCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/DatabaseInspectionCommand.php',
         'Illuminate\\Database\\Console\\DbCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/DbCommand.php',
         'Illuminate\\Database\\Console\\DumpCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/DumpCommand.php',
         'Illuminate\\Database\\Console\\Factories\\FactoryMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/Factories/FactoryMakeCommand.php',
@@ -1882,10 +1882,13 @@ class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
         'Illuminate\\Database\\Console\\Migrations\\RollbackCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/Migrations/RollbackCommand.php',
         'Illuminate\\Database\\Console\\Migrations\\StatusCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/Migrations/StatusCommand.php',
         'Illuminate\\Database\\Console\\Migrations\\TableGuesser' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/Migrations/TableGuesser.php',
+        'Illuminate\\Database\\Console\\MonitorCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/MonitorCommand.php',
         'Illuminate\\Database\\Console\\PruneCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/PruneCommand.php',
         'Illuminate\\Database\\Console\\Seeds\\SeedCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/Seeds/SeedCommand.php',
         'Illuminate\\Database\\Console\\Seeds\\SeederMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/Seeds/SeederMakeCommand.php',
         'Illuminate\\Database\\Console\\Seeds\\WithoutModelEvents' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/Seeds/WithoutModelEvents.php',
+        'Illuminate\\Database\\Console\\ShowCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/ShowCommand.php',
+        'Illuminate\\Database\\Console\\TableCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/TableCommand.php',
         'Illuminate\\Database\\Console\\WipeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Console/WipeCommand.php',
         'Illuminate\\Database\\DBAL\\TimestampType' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/DBAL/TimestampType.php',
         'Illuminate\\Database\\DatabaseManager' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/DatabaseManager.php',
@@ -1956,6 +1959,7 @@ class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
         'Illuminate\\Database\\Eloquent\\SoftDeletes' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/SoftDeletes.php',
         'Illuminate\\Database\\Eloquent\\SoftDeletingScope' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/SoftDeletingScope.php',
         'Illuminate\\Database\\Events\\ConnectionEvent' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Events/ConnectionEvent.php',
+        'Illuminate\\Database\\Events\\DatabaseBusy' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Events/DatabaseBusy.php',
         'Illuminate\\Database\\Events\\DatabaseRefreshed' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Events/DatabaseRefreshed.php',
         'Illuminate\\Database\\Events\\MigrationEnded' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Events/MigrationEnded.php',
         'Illuminate\\Database\\Events\\MigrationEvent' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Events/MigrationEvent.php',
@@ -2075,6 +2079,7 @@ class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
         'Illuminate\\Foundation\\Console\\ConfigCacheCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/ConfigCacheCommand.php',
         'Illuminate\\Foundation\\Console\\ConfigClearCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/ConfigClearCommand.php',
         'Illuminate\\Foundation\\Console\\ConsoleMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/ConsoleMakeCommand.php',
+        'Illuminate\\Foundation\\Console\\DocsCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/DocsCommand.php',
         'Illuminate\\Foundation\\Console\\DownCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/DownCommand.php',
         'Illuminate\\Foundation\\Console\\EnvironmentCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/EnvironmentCommand.php',
         'Illuminate\\Foundation\\Console\\EventCacheCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/EventCacheCommand.php',
@@ -2485,6 +2490,7 @@ class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
         'Illuminate\\Support\\Facades\\URL' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/URL.php',
         'Illuminate\\Support\\Facades\\Validator' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/Validator.php',
         'Illuminate\\Support\\Facades\\View' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/View.php',
+        'Illuminate\\Support\\Facades\\Vite' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/Vite.php',
         'Illuminate\\Support\\Fluent' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Fluent.php',
         'Illuminate\\Support\\HigherOrderCollectionProxy' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/HigherOrderCollectionProxy.php',
         'Illuminate\\Support\\HigherOrderTapProxy' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/HigherOrderTapProxy.php',
@@ -5813,10 +5819,10 @@ class ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit8302f1e760b3220050d7d1dc23f2cf4d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb688e4d3d9631586defe01f1b1d7824d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb688e4d3d9631586defe01f1b1d7824d::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb688e4d3d9631586defe01f1b1d7824d::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitb688e4d3d9631586defe01f1b1d7824d::$classMap;
 
         }, null, ClassLoader::class);
     }

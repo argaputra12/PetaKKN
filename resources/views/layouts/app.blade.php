@@ -11,8 +11,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-        <link rel="stylesheet" href="resources/css/app.css">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- <link rel="stylesheet" href="resources/css/app.css"> --}}
 
         <!-- Leaflet js -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
@@ -27,6 +27,9 @@
                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
                crossorigin="anonymous">
         </script>
+
+        <!-- csrf token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Styles -->
         <style>
@@ -90,7 +93,7 @@
 
             <!-- Page Heading -->
             <header >
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[1097px] font-inter">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-auto pb-4 font-inter">
                     {{ $header }}
                 </div>
             </header>

@@ -2,31 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Location;
+use App\Models\Desa;
+use App\Models\Kota;
+use App\Models\Lokasi;
+use App\Models\Proker;
+use Illuminate\Console\View\Components\Component;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Error;
+use Termwind\Components\Dd;
 
 class LocationController extends Controller
 {
-    //public index
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
+        //
+        $nama_kota = Kota::whereId($request->id)->first();
 
-        $cityName = $request->location;
-        // dd($cityName);
+        $desa = Desa::where('kota_id', $request->id)->get();
 
 
-        $location = DB::table('locations')->where('name', $cityName)->orWhere('name', 'like', '%' . $cityName . '%')->select('name')->get();
-
-        // return view('components.map');
-        // dd($location);
-
-        // dd($location[0]->name);
-
-        switch($location[0]->name){
-
+        switch($nama_kota->nama){
             case 'Kota Surakarta':
                 return view('location.surakarta');
                 break;
@@ -64,7 +63,7 @@ class LocationController extends Controller
                 break;
 
             case 'Kota Klaten':
-                return view('location.klaten');
+                return view('location.klaten', compact('desa'));
                 break;
 
             case 'Kabupaten Magelang':
@@ -96,5 +95,78 @@ class LocationController extends Controller
                 break;
 
         }
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request)
+    {
+        //
+
+        $data = Lokasi::where('desa_id', $request->desa_id)->first();
+        $proker = Proker::where('kelompok_id', $data->kelompok_id)->first();
+
+        return view('components.table-data', compact('data', 'proker'));
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

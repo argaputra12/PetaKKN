@@ -4,7 +4,10 @@
             Pemetaan Kelompok KKN Kota Klaten
         </h2>
 
-        <div id="map"></div>
+        <div id="map" ></div>
+        <div id="table_data" class="my-12">
+
+        </div>
 
     <script type="text/javascript" src="{{ asset('peta/Klaten.js') }}"></script>
 
@@ -138,43 +141,74 @@
 
       // marker
       var desa = [
-                ['BEKU',-7.653045, 110.638562],
-                ['BRANGKAL ',	-7.646680, 110.647529],
-                ['JURANGJERO',	-7.639179, 110.633640],
-                ['GLEDEG',	-7.632015, 110.635493],
-                ['JEBLOG',	-7.616936, 110.634461],
-                ['NGABEYAN',	-7.635188, 110.647867],
-                ['SOROPATEN',	-7.634449, 110.617890],
-                ['PONDOK',	-7.624740, 110.635597],
-                ['PADAS',	-7.640875, 110.609758],
-                ['TROSO',	-7.664532, 110.645280],
-                ['KARANGANOM',	-7.646648, 110.621273],
-                ['GEMPOL',	-7.623894, 110.623087],
-                ['PONGGOK',	-7.609881, 110.640981],
-                ['NGANJAT 1',	-7.616842, 110.643541],
-                ['GLAGAHWANGI',	-7.649142, 110.663073],
-                ['KARANGLO',	-7.612341, 110.654627],
-                ['JIMUS',	-7.617950, 110.653587],
-                ['TURUS',	-7.616471, 110.663038],
-                ['POLANHARJO',	-7.613900, 110.656739],
-                ['KAPUNGAN',	-7.640738, 110.666172],
-                ['JANTI',	-7.596277, 110.655983],
-                ['WANGEN',	-7.602599, 110.657251],
-                ['JELOBO',	-7.636104, 110.747513],
-                ['BOTO',	-7.615529, 110.717129],
-                ['BULAN',	-7.629644, 110.720946],
-                ['TELOYO',	-7.624723, 110.761864],
-                ['SEKARAN',	-7.611012, 110.723841],
-                ['GUNTING',	-7.645983, 110.770640],
-                ['LUMBUNG KEREP',	-7.628821, 110.735811],
-                ['NGREDEN',	-7.638885, 110.732406]
+                ['BEKU',-7.653045, 110.638562, 1],
+                ['BRANGKAL ',	-7.646680, 110.647529, 2],
+                ['JURANGJERO',	-7.639179, 110.633640, 3],
+                ['GLEDEG',	-7.632015, 110.635493, 4],
+                ['JEBLOG',	-7.616936, 110.634461, 5],
+                ['NGABEYAN',	-7.635188, 110.647867, 6],
+                ['SOROPATEN',	-7.634449, 110.617890, 7],
+                ['PONDOK',	-7.624740, 110.635597, 8],
+                ['PADAS',	-7.640875, 110.609758, 9],
+                ['TROSO',	-7.664532, 110.645280, 10],
+                ['KARANGANOM',	-7.646648, 110.621273, 11],
+                ['GEMPOL',	-7.623894, 110.623087, 12],
+                ['PONGGOK',	-7.609881, 110.640981, 13],
+                ['NGANJAT 1',	-7.616842, 110.643541, 14],
+                ['GLAGAHWANGI',	-7.649142, 110.663073, 15],
+                ['KARANGLO',	-7.612341, 110.654627, 16],
+                ['JIMUS',	-7.617950, 110.653587, 17],
+                ['TURUS',	-7.616471, 110.663038, 18],
+                ['POLANHARJO',	-7.613900, 110.656739, 19],
+                ['KAPUNGAN',	-7.640738, 110.666172, 20],
+                ['JANTI',	-7.596277, 110.655983, 21],
+                ['WANGEN',	-7.602599, 110.657251, 22],
+                ['JELOBO',	-7.636104, 110.747513, 23],
+                ['BOTO',	-7.615529, 110.717129, 24],
+                ['BULAN',	-7.629644, 110.720946, 25],
+                ['TELOYO',	-7.624723, 110.761864, 26],
+                ['SEKARAN',	-7.611012, 110.723841, 27],
+                ['GUNTING',	-7.645983, 110.770640, 28],
+                ['LUMBUNG KEREP',	-7.628821, 110.735811, 29],
+                ['NGREDEN',	-7.638885, 110.732406, 30]
             ];
 
             for (let i = 0; i < desa.length; i++) {
                 marker = L.marker([desa[i][1], desa[i][2]])
-                .bindPopup(`<b>${desa[i][0]}</b>`)
+                .bindPopup(`<div class="flex flex-col">
+                        <div class="flex">
+                            <div class="w-20">Desa</div>
+                            <div class="">: ${desa[i][0]}</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-20">Kelompok</div>
+                            <div class="">: 123</div>
+                        </div>
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4" onclick="showData(this)">
+                            <input type="hidden" name="desa_id" value="${desa[i][3]}">
+                            Detail
+                        </button>
+                    </div>`)
                 .addTo(map);
                 console.log(marker);
+            }
+
+            const showData = (e) =>{
+
+                const desa_id = e.children[0].value;
+
+                $.ajax({
+                    url: `{{ route('location.show') }}`,
+                    type: 'POST',
+                    data: {
+                        'desa_id': desa_id,
+                    },
+                    success: function(data) {
+                        const table_data = document.getElementById('table_data');
+                        table_data.innerHTML = data;
+                    }
+
+                });
             }
     </script>
     </x-slot>

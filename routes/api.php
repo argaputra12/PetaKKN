@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LocationController;
@@ -21,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/map', [LocationController::class, 'index'])->name('location.index');
+Route::post('/map/show', [LocationController::class, 'show'])->name('location.show');

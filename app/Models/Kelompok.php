@@ -10,7 +10,10 @@ class Kelompok extends Model
     use HasFactory;
 
     protected $fillable = [
-        'identitas_kelompok', 'nama_ketua', 'link_sosmed'
+        'identitas_kelompok',
+        'nama_ketua',
+        'link_sosmed'
     ];
 
+    
 }

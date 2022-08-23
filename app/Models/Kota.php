@@ -10,7 +10,10 @@ class Kota extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'provinsi'
+        'nama_kota',
+        'js_coordinates'
+
     ];
+
 
 }

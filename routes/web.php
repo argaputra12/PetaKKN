@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Kota;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,15 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+    $locations = Kota::all();
+
+    return view('welcome', compact('locations'));
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-// Route::get('/location/surakarta', function () {
-//     return view('location.surakarta');
-// })->name('surakarta');
 
 require __DIR__.'/auth.php';
