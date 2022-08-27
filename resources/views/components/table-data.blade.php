@@ -24,22 +24,22 @@
 <table class="table-fixed text-left border-collapse ">
     <tr>
         <th class="w-1/2 pl-2 py-2 border-b-[2px] border-slate-200">Identitas kelompok</th>
-        <td class="pl-2 py-2 border-b-[2px] pr-2 border-slate-200">{{ $data->kelompok->identitas_kelompok }}</td>
+        <td class="p-2 border-b-[2px] pr-2 border-slate-200">{{ $data->kelompok->identitas_kelompok }}</td>
     </tr>
     <tr>
         <th class="w-1/2 pl-2 py-2 border-b-[2px] border-slate-200">Nama ketua</th>
-        <td class="pl-2 py-2 border-b-[2px] pr-2 border-slate-200">{{ $data->kelompok->nama_ketua }}</td>
+        <td class="p-2 border-b-[2px] pr-2 border-slate-200">{{ $data->kelompok->nama_ketua }}</td>
     </tr>
     <tr>
         <th class="w-1/2 pl-2 py-2 border-b-[2px] border-slate-200">Sosial media</th>
-        <td class="pl-2 py-2 border-b-[2px] pr-2 border-slate-200"><a href="{{ $data->kelompok->link_sosmed }}" class="hover:text-primary-blue">Klik disini</a></td>
+        <td class="p-2 border-b-[2px] pr-2 border-slate-200"><a href="{{ $data->kelompok->link_sosmed }}" class="hover:text-primary-blue">Klik disini</a></td>
     </tr>
     <tr>
         <th class="w-1/2 pl-2 py-2 border-b-[2px] border-slate-200">Dokumen penunjang</th>
-        <td class="pl-2 py-2 border-b-[2px] pr-2 border-slate-200"><a href="{{ $proker->dokumen_penunjang }}" class="hover:text-primary-blue">Klik disini</a></td>
+        <td class="p-2 border-b-[2px] pr-2 border-slate-200"><a href="{{ $proker->dokumen_penunjang }}" class="hover:text-primary-blue">Klik disini</a></td>
     </tr>
     <tr>
         <th class="w-1/2 pl-2 py-2 align-baseline">Program telah berjalan</th>
-        <td class="pl-2 py-2  ">{{ $proker->program_telah_jalan }}</td>
+        <td class="p-2  ">{{ $proker->program_telah_jalan }}</td>
     </tr>
 </table>

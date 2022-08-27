@@ -4,7 +4,7 @@
             Pemetaan Kelompok KKN Kota Klaten
         </h2>
 
-        <div class="container flex transition-all mx-auto">
+        <div class="container flex  mx-auto">
             <div id="table_data" class="w-2/5 h-[750px] bg-white z-[9999] hidden " style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;"></div>
             <div id="map" style="width:100%" class="w-full" ></div>
         </div>
@@ -198,6 +198,7 @@
 
                 const table_data = document.getElementById('table_data');
                 table_data.classList.remove('hidden');
+
 
                 const desa_id = e.children[0].value;
 
