@@ -93,7 +93,7 @@
 
             <!-- Page Heading -->
             <header >
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-auto pb-4 font-inter">
+                <div class=" mx-auto px-4 sm:px-6 lg:px-8 h-auto pb-4 font-inter">
                     {{ $header }}
                 </div>
             </header>

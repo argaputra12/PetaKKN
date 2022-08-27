@@ -4,10 +4,11 @@
             Pemetaan Kelompok KKN Kota Klaten
         </h2>
 
-        <div id="map" ></div>
-        <div id="table_data" class="my-12">
-
+        <div class="container flex transition-all mx-auto">
+            <div id="table_data" class="w-2/5 h-[750px] bg-white z-[9999] hidden " style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;"></div>
+            <div id="map" style="width:100%" class="w-full" ></div>
         </div>
+
 
     <script type="text/javascript" src="{{ asset('peta/Klaten.js') }}"></script>
 
@@ -195,6 +196,9 @@
 
             const showData = (e) =>{
 
+                const table_data = document.getElementById('table_data');
+                table_data.classList.remove('hidden');
+
                 const desa_id = e.children[0].value;
 
                 $.ajax({
@@ -204,7 +208,6 @@
                         'desa_id': desa_id,
                     },
                     success: function(data) {
-                        const table_data = document.getElementById('table_data');
                         table_data.innerHTML = data;
                     }
 
