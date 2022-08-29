@@ -10,7 +10,7 @@
 
         </div>
 
-        <div class="title pt-16">
+        <div class="title pt-32">
             <h1 class="font-bold text-5xl w-1/3 leading-relaxed text-primary-textlight z-10 relative">
                 Pemetaan Titik Lokasi KKN UNS 2022
             </h1>
