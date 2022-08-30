@@ -4,7 +4,12 @@
             Pemetaan Kelompok KKN Kota Pangandaran
         </h2>
 
-        <div id="map"></div>
+        <div class="container flex  mx-auto mb-6">
+            <div id="map" style="width:100%" class="w-full z-10" ></div>
+        </div>
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+            <div id="table_data" ></div>
+        </div>
 
     <script type="text/javascript" src="{{ asset('peta/Pangandaran.js') }}"></script>
 
@@ -138,17 +143,47 @@
 
       // marker
       var desa = [
-                ['DS. GIRIKARYA',	-7.598731, 108.462683],
-                ['DS. CIJALU',	-7.543044, 108.373923],
-                ['DS. CIPANCUR',	-7.543107, 108.389070],
-                ['DS. PILAR',	-7.568937, 108.452522]
+                ['DS. GIRIKARYA',	-7.598731, 108.462683, 375],
+                ['DS. CIJALU',	-7.543044, 108.373923,376],
+                ['DS. CIPANCUR',	-7.543107, 108.389070,377],
+                ['DS. PILAR',	-7.568937, 108.452522,378]
             ];
 
             for (let i = 0; i < desa.length; i++) {
                 marker = L.marker([desa[i][1], desa[i][2]])
-                .bindPopup(`<b>${desa[i][0]}</b>`)
+                .bindPopup(`<div class="flex flex-col py-2">
+                        <div class="flex justify-center">
+                            <div class="font-semibold">KKN ${desa[i][0]}</div>
+                        </div>
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
+                            <input type="hidden" name="desa_id" value="${desa[i][3]}">
+                            Detail
+                        </button>
+                    </div>`)
                 .addTo(map);
                 console.log(marker);
+            }
+
+            const showData = (e) =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.remove('hidden');
+                const desa_id = e.children[0].value;
+                $.ajax({
+                    url: `{{ route('location.show') }}`,
+                    type: 'POST',
+                    data: {
+                        'desa_id': desa_id,
+                    },
+                    success: function(data) {
+                        table_data.innerHTML = data;
+                    }
+
+                });
+            }
+
+            const closeContainer = () =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.add('hidden');
             }
     </script>
     </x-slot>

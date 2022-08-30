@@ -4,7 +4,12 @@
             Pemetaan Kelompok KKN Kabupaten Brebes
         </h2>
 
-        <div id="map"></div>
+        <div class="container flex  mx-auto mb-6">
+            <div id="map" style="width:100%" class="w-full z-10" ></div>
+        </div>
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+            <div id="table_data" ></div>
+        </div>
 
     <script type="text/javascript" src="{{ asset('peta/Brebes.js') }}"></script>
 
@@ -138,16 +143,16 @@
 
       // marker
       var desa = [
-                ['KERTASINDUYASA',	-6.956467, 109.058583],
-                ['JATIBARANG KIDUL',	-6.973992, 109.059172],
-                ['KEBONAGUNG',	-6.961780, 109.024699],
-                ['TEMBELANG',	-6.934848, 109.058330],
-                ['JATIBARANG LOR',	-6.965321, 109.063965],
-                ['CENANG',	-6.991832, 108.984400],
-                ['JATIROKEH',	-6.999465, 109.019318],
-                ['SONGGOM',	-7.039579, 109.000998],
-                ['WANATAWANG',	-6.984776, 109.006723],
-                ['DUKUHMAJA',	-6.975371, 109.041617],
+                ['KERTASINDUYASA',	-6.956467, 109.058583, 359],
+                ['JATIBARANG KIDUL',	-6.973992, 109.059172,360],
+                ['KEBONAGUNG',	-6.961780, 109.024699,361],
+                ['TEMBELANG',	-6.934848, 109.058330,362],
+                ['JATIBARANG LOR',	-6.965321, 109.063965,363],
+                ['CENANG',	-6.991832, 108.984400,364],
+                ['JATIROKEH',	-6.999465, 109.019318,365],
+                ['SONGGOM',	-7.039579, 109.000998,366],
+                ['WANATAWANG',	-6.984776, 109.006723,367],
+                ['DUKUHMAJA',	-6.975371, 109.041617,368],
 
 
         ];
@@ -164,9 +169,38 @@
 
             for (let i = 0; i < desa.length; i++) {
                 marker = L.marker([desa[i][1], desa[i][2]], {icon: redIcon})
-                .bindPopup(`<b>${desa[i][0]}</b>`)
+                .bindPopup(`<div class="flex flex-col py-2">
+                        <div class="flex justify-center">
+                            <div class="font-semibold">KKN DESA ${desa[i][0]}</div>
+                        </div>
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
+                            <input type="hidden" name="desa_id" value="${desa[i][3]}">
+                            Detail
+                        </button>
+                    </div>`)
                 .addTo(map);
-                console.log(marker);
+            }
+
+            const showData = (e) =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.remove('hidden');
+                const desa_id = e.children[0].value;
+                $.ajax({
+                    url: `{{ route('location.show') }}`,
+                    type: 'POST',
+                    data: {
+                        'desa_id': desa_id,
+                    },
+                    success: function(data) {
+                        table_data.innerHTML = data;
+                    }
+
+                });
+            }
+
+            const closeContainer = () =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.add('hidden');
             }
     </script>
     </x-slot>

@@ -4,7 +4,12 @@
             Pemetaan Kelompok KKN Kabupaten Cilacap
         </h2>
 
-        <div id="map"></div>
+        <div class="container flex  mx-auto mb-6">
+            <div id="map" style="width:100%" class="w-full z-10" ></div>
+        </div>
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+            <div id="table_data" ></div>
+        </div>
 
     <script type="text/javascript" src="{{ asset('peta/Cilacap.js') }}"></script>
 
@@ -138,50 +143,51 @@
 
       // marker
       var desa = [
-                ['KUTAWARU 1','bersama', 'mabar',-7.707998, 108.978316],
-                ['KUTAWARU 2','Tidur', 'istirahat',-7.705545, 108.973830],
-                ['KUTAWARU 3','Tidur', 'istirahat',-7.706465, 108.979244],
-                ['ADIRAJA 1','Tidur', 'istirahat',-7.651430, 109.181241],
-                ['ADIRAJA 2','Tidur', 'istirahat',-7.657555, 109.177465],
-                ['KARANGTALUN',	'Tidur', 'istirahat',-7.677599, 109.018900]
+                ['KUTAWARU 1',-7.707998, 108.978316,369],
+                ['KUTAWARU 2',-7.705545, 108.973830,370],
+                ['KUTAWARU 3',-7.706465, 108.979244,371],
+                ['ADIRAJA 1',-7.651430, 109.181241,372],
+                ['ADIRAJA 2',-7.657555, 109.177465,373],
+                ['KARANGTALUN',-7.677599, 109.018900,374]
             ];
 
             for (let i = 0; i < desa.length; i++) {
-                marker = L.marker([desa[i][3], desa[i][4]])
-                .bindPopup(`<div class="flex flex-col items-center">
-                    <div class="item">
-                        Desa: ${desa[i][0]}
-                    </div>
-                    <div class="item">
-                        Tema: ${desa[i][1]}
-                    </div>
-                    <div class="item">
-                        Judul: ${desa[i][2]}
-                    </div>
-                    <div class="item">
-                        ${desa[i][0]}
-                    </div>
-                </div>`)
+                marker = L.marker([desa[i][1], desa[i][2]])
+                .bindPopup(`<div class="flex flex-col py-2">
+                        <div class="flex justify-center">
+                            <div class="font-semibold">KKN DESA ${desa[i][0]}</div>
+                        </div>
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
+                            <input type="hidden" name="desa_id" value="${desa[i][3]}">
+                            Detail
+                        </button>
+                    </div>`)
                 .addTo(map);
-                console.log(marker);
+            }
+
+            const showData = (e) =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.remove('hidden');
+                const desa_id = e.children[0].value;
+                $.ajax({
+                    url: `{{ route('location.show') }}`,
+                    type: 'POST',
+                    data: {
+                        'desa_id': desa_id,
+                    },
+                    success: function(data) {
+                        table_data.innerHTML = data;
+                    }
+
+                });
+            }
+
+            const closeContainer = () =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.add('hidden');
             }
     </script>
     </x-slot>
 
 
 </x-app-layout>
-
-{{-- <div class="flex flex-col items-center">
-    <div class="item">
-        ${desa[i][0]}
-    </div>
-    <div class="item">
-        ${desa[i][0]}
-    </div>
-    <div class="item">
-        ${desa[i][0]}
-    </div>
-    <div class="item">
-        ${desa[i][0]}
-    </div>
-</div> --}}

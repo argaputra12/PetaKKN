@@ -4,7 +4,12 @@
             Pemetaan Kelompok KKN Kabupaten Grobogan
         </h2>
 
-        <div id="map"></div>
+        <div class="container flex  mx-auto mb-6">
+            <div id="map" style="width:100%" class="w-full z-10" ></div>
+        </div>
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+            <div id="table_data" ></div>
+        </div>
 
     <script type="text/javascript" src="{{ asset('peta/Grobogan.js') }}"></script>
 
@@ -138,36 +143,65 @@
 
       // marker
       var desa = [
-                ['BANDUNGSARI',	-7.054344, 111.163627],
-                ['BELOR',	-7.034585, 111.204282],
-                ['KALANGDOSARI',	-7.085045, 111.204532],
-                ['KALANGLUNDO',	-7.078167, 111.176732],
-                ['NGARAPARAP',	-7.057070, 111.205855],
-                ['NGARINGAN',	-7.047189, 111.129294],
-                ['PENDEM',	-7.059896, 111.146260],
-                ['SARIREJO',	-7.107651, 111.167853],
-                ['SENDANGREJO',	-7.107289, 111.138106],
-                ['SUMBERAGUNG',	-7.000493, 111.139693],
-                ['TANJUNGHARJO',	-7.033228, 111.181157],
-                ['TRUWOLU',	-7.086716, 111.144957],
-                ['GODAN',	-7.023191, 111.023962],
-                ['JONO',	-7.086805, 110.983198],
-                ['KEMADUHBATUR',	-6.986381, 111.033776],
-                ['MAYAHAN',	-7.078562, 110.964286],
-                ['PLOSOREJO',	-7.059805, 110.982935],
-                ['POJOK',	-7.063852, 111.009555],
-                ['POULONGRAMBE',	-7.096967, 110.963627],
-                ['SELO',	-7.094405, 111.004584],
-                ['TARUB',	-7.072173, 111.016558],
-                ['TAWANGHARJO',	-7.074173, 111.017152]
+                ['BANDUNGSARI',	-7.054344, 111.163627,337],
+                ['BELOR',	-7.034585, 111.204282,338],
+                ['KALANGDOSARI',	-7.085045, 111.204532,339],
+                ['KALANGLUNDO',	-7.078167, 111.176732,340],
+                ['NGARAPARAP',	-7.057070, 111.205855,341],
+                ['NGARINGAN',	-7.047189, 111.129294,342],
+                ['PENDEM',	-7.059896, 111.146260,343],
+                ['SARIREJO',	-7.107651, 111.167853,344],
+                ['SENDANGREJO',	-7.107289, 111.138106,345],
+                ['SUMBERAGUNG',	-7.000493, 111.139693,346],
+                ['TANJUNGHARJO',	-7.033228, 111.181157,347],
+                ['TRUWOLU',	-7.086716, 111.144957,348],
+                ['GODAN',	-7.023191, 111.023962,349],
+                ['JONO',	-7.086805, 110.983198,350],
+                ['KEMADUHBATUR',	-6.986381, 111.033776,351],
+                ['MAYAHAN',	-7.078562, 110.964286,352],
+                ['PLOSOREJO',	-7.059805, 110.982935,353],
+                ['POJOK',	-7.063852, 111.009555,354],
+                ['POULONGRAMBE',	-7.096967, 110.963627,355],
+                ['SELO',	-7.094405, 111.004584,356],
+                ['TARUB',	-7.072173, 111.016558,357],
+                ['TAWANGHARJO',	-7.074173, 111.017152,358]
 
             ];
 
             for (let i = 0; i < desa.length; i++) {
                 marker = L.marker([desa[i][1], desa[i][2]])
-                .bindPopup(`<b>${desa[i][0]}</b>`)
+                .bindPopup(`<div class="flex flex-col py-2">
+                        <div class="flex justify-center">
+                            <div class="font-semibold">KKN DESA ${desa[i][0]}</div>
+                        </div>
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
+                            <input type="hidden" name="desa_id" value="${desa[i][3]}">
+                            Detail
+                        </button>
+                    </div>`)
                 .addTo(map);
-                console.log(marker);
+            }
+
+            const showData = (e) =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.remove('hidden');
+                const desa_id = e.children[0].value;
+                $.ajax({
+                    url: `{{ route('location.show') }}`,
+                    type: 'POST',
+                    data: {
+                        'desa_id': desa_id,
+                    },
+                    success: function(data) {
+                        table_data.innerHTML = data;
+                    }
+
+                });
+            }
+
+            const closeContainer = () =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.add('hidden');
             }
     </script>
     </x-slot>
