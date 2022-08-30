@@ -178,16 +178,11 @@
 
             for (let i = 0; i < desa.length; i++) {
                 marker = L.marker([desa[i][1], desa[i][2]])
-                .bindPopup(`<div class="flex flex-col">
-                        <div class="flex">
-                            <div class="w-20">Desa</div>
-                            <div class="">: ${desa[i][0]}</div>
+                .bindPopup(`<div class="flex flex-col py-2">
+                        <div class="flex justify-center">
+                            <div class="font-semibold">KKN DESA ${desa[i][0]}</div>
                         </div>
-                        <div class="flex">
-                            <div class="w-20">Kelompok</div>
-                            <div class="">: 123</div>
-                        </div>
-                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4" onclick="showData(this)">
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
                             <input type="hidden" name="desa_id" value="${desa[i][3]}">
                             Detail
                         </button>
