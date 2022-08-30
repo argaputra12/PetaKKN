@@ -27,7 +27,7 @@ class LocationController extends Controller
 
         switch($nama_kota->nama){
             case 'Kota Surakarta':
-                return view('location.surakarta');
+                return view('location.surakarta')->with('nama_kota', $nama_kota);
                 break;
 
             case 'Kabupaten Boyolali':

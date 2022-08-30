@@ -19,5 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/map', [LocationController::class, 'index'])->name('location.index');
+
 Route::post('/map/show', [LocationController::class, 'show'])->name('location.show');

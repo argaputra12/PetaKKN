@@ -28,6 +28,7 @@
             </button>
         </div> --}}
         <form action="{{ route('location.index') }}" method="post" class="pt-12 relative z-10">
+            @csrf
             <select name="id" id="" class="rounded-xl h-12 bg-opacity-50">
                 <option value="" >Pilih Lokasi</option>
                 @foreach ($locations as $location)
