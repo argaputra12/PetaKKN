@@ -4,7 +4,12 @@
             Pemetaan Kelompok KKN Kabupaten Sragen
         </h2>
 
-        <div id='map'></div>
+        <div class="container flex  mx-auto mb-6">
+            <div id="map" style="width:100%" class="w-full z-10" ></div>
+        </div>
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+            <div id="table_data" ></div>
+        </div>
 
         <script type="text/javascript" src="{{ asset('peta/Sragen.js') }}"></script>
 
@@ -124,32 +129,32 @@
 
             // marker
             var desa = [
-                ['GENENG', -7.391884, 110.786813],
-                ['JERUK', -7.384459, 110.799560],
-                ['SUNGGINGAN',-7.375844, 110.808751],
-                ['GIRIMARGO',-7.372149, 110.822698],
-                ['DOYONG',-7.362288, 110.838982],
-                ['SOKO',-7.351308, 110.831412],
-                ['BROJOL',-7.359577, 110.804133],
-                ['BAGOR',-7.340743, 110.810016],
-                ['GILIREJO',-7.289205, 110.798621],
-                ['GILIREJO BARU',-7.276183, 110.802370],
-                ['PENDEM',-7.336494, 110.842781],
-                ['HADILUWIH',-7.355589, 110.860353],
-                ['JATI',-7.351622, 110.880052],
-                ['CEPOKO',-7.337377, 110.884679],
-                ['MOJOPURO',-7.328913, 110.865887],
-                ['NGANDUL',-7.325365, 110.857218],
-                ['PAGAK',-7.320413, 110.893567],
-                ['NGARGOSARI',-7.278713, 110.863468],
-                ['NGARGOTIRTO',-7.301689, 110.855966],
-                ['MONDOKAN',-7.320425, 110.931938],
-                ['TEMPELREJO',-7.351635, 110.925863],
-                ['TROMBOL',-7.359186, 110.942417],
-                ['PARE',-7.320275, 110.912883],
-                ['JEKANI',-7.331403, 110.935029],
-                ['KEDAWUNG',-7.313608, 110.945263],
-                ['JAMBANGAN',-7.292240, 110.948177]
+                ['GENENG', -7.391884, 110.786813, 191],
+                ['JERUK', -7.384459, 110.799560, 192],
+                ['SUNGGINGAN',-7.375844, 110.808751, 193],
+                ['GIRIMARGO',-7.372149, 110.822698,194],
+                ['DOYONG',-7.362288, 110.838982,195],
+                ['SOKO',-7.351308, 110.831412,196],
+                ['BROJOL',-7.359577, 110.804133,197],
+                ['BAGOR',-7.340743, 110.810016,198],
+                ['GILIREJO',-7.289205, 110.798621,199],
+                ['GILIREJO BARU',-7.276183, 110.802370,200],
+                ['PENDEM',-7.336494, 110.842781,201],
+                ['HADILUWIH',-7.355589, 110.860353,202],
+                ['JATI',-7.351622, 110.880052,203],
+                ['CEPOKO',-7.337377, 110.884679,204],
+                ['MOJOPURO',-7.328913, 110.865887,205],
+                ['NGANDUL',-7.325365, 110.857218,206],
+                ['PAGAK',-7.320413, 110.893567,207],
+                ['NGARGOSARI',-7.278713, 110.863468,208],
+                ['NGARGOTIRTO',-7.301689, 110.855966,209],
+                ['MONDOKAN',-7.320425, 110.931938,210],
+                ['TEMPELREJO',-7.351635, 110.925863,211],
+                ['TROMBOL',-7.359186, 110.942417,212],
+                ['PARE',-7.320275, 110.912883,213],
+                ['JEKANI',-7.331403, 110.935029,214],
+                ['KEDAWUNG',-7.313608, 110.945263,215],
+                ['JAMBANGAN',-7.292240, 110.948177,216]
             ];
 
             var redIcon = new L.Icon({
@@ -164,9 +169,41 @@
 
             for (let i = 0; i < desa.length; i++) {
                 marker = L.marker([desa[i][1], desa[i][2]], {icon: redIcon})
-                .bindPopup(`<b>${desa[i][0]}</b>`)
+                .bindPopup(`<div class="flex flex-col py-2">
+                        <div class="flex justify-center">
+                            <div class="font-semibold">KKN DESA ${desa[i][0]}</div>
+                        </div>
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
+                            <input type="hidden" name="desa_id" value="${desa[i][3]}">
+                            Detail
+                        </button>
+                    </div>`)
                 .addTo(map);
-                console.log(marker);
+            }
+
+            const showData = (e) =>{
+
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.remove('hidden');
+
+                const desa_id = e.children[0].value;
+
+                $.ajax({
+                    url: `{{ route('location.show') }}`,
+                    type: 'POST',
+                    data: {
+                        'desa_id': desa_id,
+                    },
+                    success: function(data) {
+                        table_data.innerHTML = data;
+                    }
+
+                });
+            }
+
+            const closeContainer = () =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.add('hidden');
             }
         </script>
     </x-slot>

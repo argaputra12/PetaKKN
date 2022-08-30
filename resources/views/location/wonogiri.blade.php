@@ -4,7 +4,12 @@
             Pemetaan Kelompok KKN Kabupaten Wonogiri
         </h2>
 
-        <div id="map"></div>
+        <div class="container flex  mx-auto mb-6">
+            <div id="map" style="width:100%" class="w-full z-10" ></div>
+        </div>
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+            <div id="table_data" ></div>
+        </div>
 
         <script type="text/javascript" src="{{ asset('peta/Wonogiri.js') }}"></script>
 
@@ -133,29 +138,29 @@
 
           // marker
           var desa = [
-                ['JATISARI 1',	-7.842368, 111.117395],
-                ['NGELO 1',	-7.906354, 111.116526],
-                ['NGELO 2',	-7.916633, 111.122335],
-                ['JEBLOGAN 1',	-8.069697, 111.025930],
-                ['JEBLOGAN 2',	-8.054121, 111.047812],
-                ['KARANGTENGAH 1',	-8.021984, 111.100755],
-                ['KARANGTENGAH 2',	-8.048099, 111.098801],
-                ['NGAMBARSARI 1',	-8.029283, 111.032554],
-                ['NGAMBARSARI 2',	-8.015585, 111.070143],
-                ['PURWOHARJO 1',	-8.049215, 111.117254],
-                ['PURWOHARJO 2',	-8.018278, 111.123603],
-                ['TEMBORO 1',	-7.981453, 111.048171],
-                ['TEMBORO 2',	-7.997942, 111.057271],
-                ['KETOS 1',	-8.152489, 110.848298],
-                ['KETOS 2',	-8.168204, 110.844382],
-                ['JOHUNUT 1',	-8.139432, 110.845906],
-                ['JOHUNUT 2',	-8.135022, 110.862835],
-                ['GUDANGHARJO 1',	-8.180232, 110.868146],
-                ['GUDANGHARJO 2',	-8.196955, 110.867146],
-                ['GUNTURHARJO 1',	-8.179429, 110.889895],
-                ['GUNTURHARJO 2',	-8.202027, 110.890240],
-                ['SAMBIHARJO 1',	-8.156839, 110.865659],
-                ['SAMBIHARJO 2',	-8.166975, 110.879734],
+                ['JATISARI 1',	-7.842368, 111.117395,217],
+                ['NGELO 1',	-7.906354, 111.116526,218],
+                ['NGELO 2',	-7.916633, 111.122335,219],
+                ['JEBLOGAN 1',	-8.069697, 111.025930,220],
+                ['JEBLOGAN 2',	-8.054121, 111.047812,221],
+                ['KARANGTENGAH 1',	-8.021984, 111.100755,222],
+                ['KARANGTENGAH 2',	-8.048099, 111.098801,223],
+                ['NGAMBARSARI 1',	-8.029283, 111.032554,224],
+                ['NGAMBARSARI 2',	-8.015585, 111.070143,225],
+                ['PURWOHARJO 1',	-8.049215, 111.117254,226],
+                ['PURWOHARJO 2',	-8.018278, 111.123603,227],
+                ['TEMBORO 1',	-7.981453, 111.048171,228],
+                ['TEMBORO 2',	-7.997942, 111.057271,229],
+                ['KETOS 1',	-8.152489, 110.848298,230],
+                ['KETOS 2',	-8.168204, 110.844382,231],
+                ['JOHUNUT 1',	-8.139432, 110.845906,232],
+                ['JOHUNUT 2',	-8.135022, 110.862835,233],
+                ['GUDANGHARJO 1',	-8.180232, 110.868146,234],
+                ['GUDANGHARJO 2',	-8.196955, 110.867146,235],
+                ['GUNTURHARJO 1',	-8.179429, 110.889895,236],
+                ['GUNTURHARJO 2',	-8.202027, 110.890240,237],
+                ['SAMBIHARJO 1',	-8.156839, 110.865659,238],
+                ['SAMBIHARJO 2',	-8.166975, 110.879734,239],
 
             ];
 
@@ -171,9 +176,42 @@
 
             for (let i = 0; i < desa.length; i++) {
                 marker = L.marker([desa[i][1], desa[i][2]], {icon: redIcon})
-                .bindPopup(`<b>${desa[i][0]}</b>`)
+                .bindPopup(`<div class="flex flex-col py-2">
+                        <div class="flex justify-center">
+                            <div class="font-semibold">KKN DESA ${desa[i][0]}</div>
+                        </div>
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
+                            <input type="hidden" name="desa_id" value="${desa[i][3]}">
+                            Detail
+                        </button>
+                    </div>`)
                 .addTo(map);
                 console.log(marker);
+            }
+
+            const showData = (e) =>{
+
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.remove('hidden');
+
+                const desa_id = e.children[0].value;
+
+                $.ajax({
+                    url: `{{ route('location.show') }}`,
+                    type: 'POST',
+                    data: {
+                        'desa_id': desa_id,
+                    },
+                    success: function(data) {
+                        table_data.innerHTML = data;
+                    }
+
+                });
+            }
+
+            const closeContainer = () =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.add('hidden');
             }
         </script>
     </x-slot>

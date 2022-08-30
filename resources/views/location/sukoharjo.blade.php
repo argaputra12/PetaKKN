@@ -189,6 +189,7 @@
                 .addTo(map);
                 console.log(marker);
             }
+
             const showData = (e) =>{
 
             const table_data = document.querySelector('.modal-container');
