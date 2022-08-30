@@ -28,6 +28,9 @@
                crossorigin="anonymous">
         </script>
 
+        <!-- Font awesome -->
+        <script src="https://kit.fontawesome.com/0b736e1e36.js" crossorigin="anonymous"></script>
+
         <!-- csrf token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 

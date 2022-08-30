@@ -5,8 +5,10 @@
         </h2>
 
         <div class="container flex  mx-auto mb-6">
-            <div id="table_data" class="w-2/5 h-[750px] bg-white z-[9999] hidden " style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;"></div>
-            <div id="map" style="width:100%" class="w-full" ></div>
+          <div id="map" style="width:100%" class="w-full z-10" ></div>
+        </div>
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+          <div id="table_data" ></div>
         </div>
 
 
@@ -196,7 +198,7 @@
 
             const showData = (e) =>{
 
-                const table_data = document.getElementById('table_data');
+                const table_data = document.querySelector('.modal-container');
                 table_data.classList.remove('hidden');
 
 
@@ -213,6 +215,11 @@
                     }
 
                 });
+            }
+
+            const closeContainer = () =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.add('hidden');
             }
     </script>
     </x-slot>
