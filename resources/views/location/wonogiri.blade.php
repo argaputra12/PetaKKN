@@ -186,7 +186,6 @@
                         </button>
                     </div>`)
                 .addTo(map);
-                console.log(marker);
             }
 
             const showData = (e) =>{

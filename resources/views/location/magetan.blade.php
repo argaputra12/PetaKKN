@@ -4,7 +4,12 @@
             Pemetaan Kelompok KKN Kabupaten Magetan
         </h2>
 
-        <div id="map"></div>
+        <div class="container flex  mx-auto mb-6">
+            <div id="map" style="width:100%" class="w-full z-10" ></div>
+        </div>
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+            <div id="table_data" ></div>
+        </div>
 
     <script type="text/javascript" src="{{ asset('peta/Magetan.js') }}"></script>
 
@@ -138,23 +143,55 @@
 
       // marker
       var desa = [
-                ['GENILANGIT',	-7.709578, 111.219388],
-                ['SIDOMUKTI',	-7.686776, 111.272145],
-                ['GONGGANG',	-7.732420, 111.226350],
-                ['KRATON',	-7.592536, 111.446808],
-                ['GULUN',	-7.591336, 111.421000],
-                ['TANJUNGSEPREH',	-7.588621, 111.411001],
-                ['GAMBIRAN',	-7.607572, 111.467073],
-                ['JAJAR',	-7.522271, 111.484861],
-                ['KARTOHARJO',	-7.535334, 111.489255],
-                ['SUKOWIDI',	-7.544002, 111.502836]
+                ['GENILANGIT',	-7.709578, 111.219388,240],
+                ['SIDOMUKTI',	-7.686776, 111.272145,241],
+                ['GONGGANG',	-7.732420, 111.226350,242],
+                ['KRATON',	-7.592536, 111.446808,243],
+                ['GULUN',	-7.591336, 111.421000,244],
+                ['TANJUNGSEPREH',	-7.588621, 111.411001,245],
+                ['GAMBIRAN',	-7.607572, 111.467073,246],
+                ['JAJAR',	-7.522271, 111.484861,247],
+                ['KARTOHARJO',	-7.535334, 111.489255,248],
+                ['SUKOWIDI',	-7.544002, 111.502836,249]
             ];
 
             for (let i = 0; i < desa.length; i++) {
                 marker = L.marker([desa[i][1], desa[i][2]])
-                .bindPopup(`<b>${desa[i][0]}</b>`)
+                .bindPopup(`<div class="flex flex-col py-2">
+                        <div class="flex justify-center">
+                            <div class="font-semibold">KKN DESA ${desa[i][0]}</div>
+                        </div>
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
+                            <input type="hidden" name="desa_id" value="${desa[i][3]}">
+                            Detail
+                        </button>
+                    </div>`)
                 .addTo(map);
-                console.log(marker);
+            }
+
+            const showData = (e) =>{
+
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.remove('hidden');
+
+                const desa_id = e.children[0].value;
+
+                $.ajax({
+                    url: `{{ route('location.show') }}`,
+                    type: 'POST',
+                    data: {
+                        'desa_id': desa_id,
+                    },
+                    success: function(data) {
+                        table_data.innerHTML = data;
+                    }
+
+                });
+            }
+
+            const closeContainer = () =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.add('hidden');
             }
     </script>
     </x-slot>
