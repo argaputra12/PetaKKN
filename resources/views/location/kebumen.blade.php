@@ -4,7 +4,12 @@
             Pemetaan Kelompok KKN Kabupaten Kebumen
         </h2>
 
-        <div id="map"></div>
+        <div class="container flex  mx-auto mb-6">
+            <div id="map" style="width:100%" class="w-full z-10" ></div>
+        </div>
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+            <div id="table_data" ></div>
+        </div>
 
     <script type="text/javascript" src="{{ asset('peta/Kebumen.js') }}"></script>
 
@@ -138,31 +143,31 @@
 
       // marker
       var desa = [
-                ['PATUKGAWEMULYO ',	-7.787356, 109.814133],
-                ['PATUKREJOMULYO ',	-7.782762, 109.800509],
-                ['TLOGOPRAGOTO ',	-7.816872, 109.787274],
-                ['PONCOWARNO',	-7.662104, 109.745002],
-                ['ROWO ',	-7.806448, 109.828932],
-                ['KARANGGAYAM',	-7.555346, 109.658866],
-                ['KEBAKALAN',	-7.566218, 109.655862],
-                ['SEBARA',	-7.525471, 109.708320],
-                ['KALIGENDING',	-7.594627, 109.690495],
-                ['LOGEDE',	-7.684187, 109.624174],
-                ['KEBULUSAN',	-7.670186, 109.630741],
-                ['PENGARINGAN',	-7.599837, 109.641256],
-                ['KEC KUTOWINANGUN 1',	-7.705289, 109.744305],
-                ['KEC KUTOWINANGUN 2',	-7.708181, 109.753060],
-                ['JATIMALANG',	-7.725889, 109.638427],
-                ['JOGOMERTAN',	-7.748834, 109.609345],
-                ['WONOSARI',	-7.524306, 109.734872],
-                ['PUCANGAN',	-7.524756, 109.688464],
-                ['TANGGULANGIN',	-7.781062, 109.637943],
-                ['BANJARWINANGUN',	-7.703395, 109.612252],
-                ['AMPELSARI ',	-7.756625, 109.597967],
-                ['JOGOSIMO',	-7.776894, 109.614466],
-                ['KRAKAL',	-7.612887, 109.703037],
-                ['KALIPUTIH',	-7.618555, 109.751168],
-                ['KEMANGGUAN ',	-7.632874, 109.665911],
+                ['PATUKGAWEMULYO ',	-7.787356, 109.814133,292],
+                ['PATUKREJOMULYO ',	-7.782762, 109.800509,293],
+                ['TLOGOPRAGOTO ',	-7.816872, 109.787274,294],
+                ['PONCOWARNO',	-7.662104, 109.745002,295],
+                ['ROWO ',	-7.806448, 109.828932,296],
+                ['KARANGGAYAM',	-7.555346, 109.658866,297],
+                ['KEBAKALAN',	-7.566218, 109.655862,298],
+                ['SEBARA',	-7.525471, 109.708320,299],
+                ['KALIGENDING',	-7.594627, 109.690495,300],
+                ['LOGEDE',	-7.684187, 109.624174,301],
+                ['KEBULUSAN',	-7.670186, 109.630741,302],
+                ['PENGARINGAN',	-7.599837, 109.641256,303],
+                ['MEKARSARI',	-7.705289, 109.744305,304],
+                ['MRINEN',	-7.708181, 109.753060,305],
+                ['JATIMALANG',	-7.725889, 109.638427,306],
+                ['PESALAKAN',	-7.748834, 109.609345,307],
+                ['WONOSARI',	-7.524306, 109.734872,308],
+                ['PUCANGAN',	-7.524756, 109.688464,309],
+                ['TANGGULANGIN',	-7.781062, 109.637943,310],
+                ['BANJARWINANGUN',	-7.703395, 109.612252,311],
+                ['AMPELSARI ',	-7.756625, 109.597967,312],
+                ['JOGOSIMO',	-7.776894, 109.614466,313],
+                ['KRAKAL',	-7.612887, 109.703037,314],
+                ['KALIPUTIH',	-7.618555, 109.751168,315],
+                ['KEMANGGUAN ',	-7.632874, 109.665911,316],
 
             ];
 
@@ -178,9 +183,41 @@
 
             for (let i = 0; i < desa.length; i++) {
                 marker = L.marker([desa[i][1], desa[i][2]], {icon: redIcon})
-                .bindPopup(`<b>${desa[i][0]}</b>`)
+                .bindPopup(`<div class="flex flex-col py-2">
+                        <div class="flex justify-center">
+                            <div class="font-semibold">KKN DESA ${desa[i][0]}</div>
+                        </div>
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
+                            <input type="hidden" name="desa_id" value="${desa[i][3]}">
+                            Detail
+                        </button>
+                    </div>`)
                 .addTo(map);
-                console.log(marker);
+            }
+
+            const showData = (e) =>{
+
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.remove('hidden');
+
+                const desa_id = e.children[0].value;
+
+                $.ajax({
+                    url: `{{ route('location.show') }}`,
+                    type: 'POST',
+                    data: {
+                        'desa_id': desa_id,
+                    },
+                    success: function(data) {
+                        table_data.innerHTML = data;
+                    }
+
+                });
+            }
+
+            const closeContainer = () =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.add('hidden');
             }
     </script>
     </x-slot>

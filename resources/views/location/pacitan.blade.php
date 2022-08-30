@@ -4,7 +4,12 @@
             Pemetaan Kelompok KKN Kabupaten Pacitan
         </h2>
 
-        <div id="map"></div>
+        <div class="container flex  mx-auto mb-6">
+            <div id="map" style="width:100%" class="w-full z-10" ></div>
+        </div>
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+            <div id="table_data" ></div>
+        </div>
 
     <script type="text/javascript" src="{{ asset('peta/Pacitan.js') }}"></script>
 
@@ -138,26 +143,25 @@
 
       // marker
       var desa = [
-                ['CANDI',	-8.246477, 111.009859],
-                ['WATUKARUNG',	-8.234167, 110.978600],
-                ['SUGIHWARAS',	-8.190458, 110.994483],
-                ['POKO',	-8.239884, 111.038041],
-                ['DONOROJO',	-8.140710, 110.940974],
-                ['KLESEM',	-8.261815, 111.181307],
-                ['SIDOMULYO',	-8.239804, 111.267615],
-                ['KARANGANYAR',	-8.226837, 111.147643],
-                ['KLESEM 2',	-8.267251, 111.171865],
-                ['SIDOMULYO 1',	-8.253558, 111.186865],
-                ['KLEPU',	-8.170392, 110.934547],
-                ['HADILUWIH',	-8.235230, 111.307146],
-                ['PAGEREJO',	-8.217696, 111.303187],
-                ['TAHUNAN BARU',	-8.015564, 111.343201],
-                ['GEMAHARJO',	-8.049949, 111.347576],
-                ['KARANGANYAR 2',	-8.235671, 111.157771],
-                ['GEDOMPOL',	-8.140683, 110.926468],
-                ['SIDOMULYO 2',	-8.252539, 111.198195],
-                ['GEDOMPOL 2',	-8.131762, 110.937626],
-
+                ['CANDI',	-8.246477, 111.009859, 317],
+                ['WATUKARUNG',	-8.234167, 110.978600,318],
+                ['SUGIHWARAS',	-8.190458, 110.994483,319],
+                ['POKO',	-8.239884, 111.038041,320],
+                ['DONOROJO',	-8.140710, 110.940974,321],
+                ['KLESEM',	-8.261815, 111.181307,322],
+                ['SIDOMULYO',	-8.239804, 111.267615,323],
+                ['KARANGANYAR',	-8.226837, 111.147643,324],
+                ['KLESEM 2',	-8.267251, 111.171865,325],
+                ['SIDOMULYO 1',	-8.253558, 111.186865,326],
+                ['KLEPU',	-8.170392, 110.934547,327],
+                ['HADILUWIH',	-8.235230, 111.307146,328],
+                ['PAGEREJO',	-8.217696, 111.303187,329],
+                ['TAHUNAN BARU',	-8.015564, 111.343201,330],
+                ['GEMAHARJO',	-8.049949, 111.347576,331],
+                ['KARANGANYAR 2',	-8.235671, 111.157771,332],
+                ['GEDOMPOL',	-8.140683, 110.926468,333],
+                ['SIDOMULYO 2',	-8.252539, 111.198195,334],
+                ['GEDOMPOL 2',	-8.131762, 110.937626,335],
 
             ];
 
@@ -171,11 +175,43 @@
                 });
 
 
-            for (let i = 0; i < desa.length; i++) {
+                for (let i = 0; i < desa.length; i++) {
                 marker = L.marker([desa[i][1], desa[i][2]], {icon: redIcon})
-                .bindPopup(`<b>${desa[i][0]}</b>`)
+                .bindPopup(`<div class="flex flex-col py-2">
+                        <div class="flex justify-center">
+                            <div class="font-semibold">KKN DESA ${desa[i][0]}</div>
+                        </div>
+                        <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
+                            <input type="hidden" name="desa_id" value="${desa[i][3]}">
+                            Detail
+                        </button>
+                    </div>`)
                 .addTo(map);
-                console.log(marker);
+            }
+
+            const showData = (e) =>{
+
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.remove('hidden');
+
+                const desa_id = e.children[0].value;
+
+                $.ajax({
+                    url: `{{ route('location.show') }}`,
+                    type: 'POST',
+                    data: {
+                        'desa_id': desa_id,
+                    },
+                    success: function(data) {
+                        table_data.innerHTML = data;
+                    }
+
+                });
+            }
+
+            const closeContainer = () =>{
+                const table_data = document.querySelector('.modal-container');
+                table_data.classList.add('hidden');
             }
     </script>
     </x-slot>
