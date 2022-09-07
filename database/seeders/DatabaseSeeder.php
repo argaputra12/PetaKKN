@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(KotaSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
