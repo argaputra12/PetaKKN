@@ -48,6 +48,10 @@
         <td class="p-2 border-b-[2px] pr-2 border-slate-200"><a href="{{ $proker->dokumen_penunjang }}" class="hover:text-primary-blue">Klik disini</a></td>
     </tr>
     <tr>
+        <th class="w-1/2 pl-2 py-2 border-b-[2px] border-slate-200">Status Keberlanjutan</th>
+        <td class="p-2 border-b-[2px] pr-2 border-slate-200"><a href="{{ $proker->dokumen_penunjang }}" class="hover:text-primary-blue">Klik disini</a></td>
+    </tr>
+    <tr>
         <th class="w-1/2 pl-2 py-2 align-baseline">Program telah berjalan</th>
         <td class="p-2  ">{{ $proker->program_telah_jalan }}</td>
     </tr>

@@ -211,7 +211,10 @@
                 marker = L.marker([desa[i][1], desa[i][2]], {icon: redIcon})
                 .bindPopup(`<div class="flex flex-col py-2">
                         <div class="flex justify-center">
-                            <div class="font-semibold">KKN DESA ${desa[i][0]}</div>
+                            <div class="font-semibold">KKN DESA ${desa[i][0]}
+                            <br> 
+                            <p>Status : </p>
+                            </div> 
                         </div>
                         <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
                             <input type="hidden" name="desa_id" value="${desa[i][3]}">
