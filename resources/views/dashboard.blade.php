@@ -22,64 +22,67 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input type="text" id="table-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  " placeholder="Search for items">
+                                <input type="text" id="table-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  " placeholder="Search for items" onkeyup="searchData(this.value)">
                         </div>
                             </div>
-                            <table class="w-full text-sm text-left text-primary-textdark ">
-                                <thead class="text-base border">
-                                    <tr>
-                                        <th scope="col" class="p-4">
-                                            Kelompok
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Nama Ketua
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Proker
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Dokumentasi
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Status
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            <span class="sr-only">Edit</span>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($lokasis as $index=>$lokasi)
+                            <div id="table-container">
+                                <table class="w-full text-sm text-left text-primary-textdark ">
+                                    <thead class="text-base border-b">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3">
+                                                Kelompok
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                Desa
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                Kecamatan
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                Kota
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                Status
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                Aksi
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($lokasis as $index=>$lokasi)
 
-                                    <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 hover:text-primary-textlight">
-                                        <td class="w-4 p-4">
-                                            <div class="flex items-center text-sm">
-                                                <div>
-                                                    <p class="font-semibold">Kelompok {{ $lokasi->kelompok->identitas_kelompok }}</p>
+                                        <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 hover:text-primary-textlight">
+                                            <td class=" px-6 py-4">
+                                                <div class="flex items-center text-sm">
+                                                    <div>
+                                                        <p class="font-semibold">Kelompok {{ $lokasi->kelompok->identitas_kelompok }}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <th scope="row" class="px-6 py-4 font-medium">
-                                            {{ $lokasi->kelompok->nama_ketua }}
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            {{ $prokers[$index]->program_telah_jalan }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $prokers[$index]->dokumen_penunjang }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            Pending
-                                        </td>
-                                        <td class="px-6 py-4 text-right">
-                                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <div class="w-full p-4">
-                                {{ $lokasis->links() }}
+                                            </td>
+                                            <td scope="row" class="px-6 py-4">
+                                                Desa {{ ucwords(strtolower($lokasi->desa->nama_desa)) }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                Kecamatan {{ ucwords(strtolower($lokasi->desa->nama_kecamatan))}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $lokasi->desa->kota->nama }}
+                                            </td>
+
+                                            <td class="px-6 py-4">
+                                                Pending
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="w-full p-4">
+                                    {{ $lokasis->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,4 +91,19 @@
         </div>
     </div>
     <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
+    <script>
+        const searchData = (value) => {
+            const table_container = document.querySelector('#table-container');
+            console.log(value);
+            $.ajax({
+                url: '{{ route('admin.search') }}',
+                type: 'get',
+                data: { search: value },
+                success: function(response)
+                {
+                    table_container.innerHTML = response;
+                }
+            });
+        }
+    </script>
 </x-app-layout>

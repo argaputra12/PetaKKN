@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LocationController;
 
 /*
@@ -22,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/map/show', [LocationController::class, 'show'])->name('location.show');
 Route::get('/map/show', [LocationController::class, 'show'])->name('location.show');
+Route::get('/dashboard', [AdminController::class, 'search'])->name('admin.search');
