@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Kota;
+use App\Models\Lokasi;
+use App\Models\Proker;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LocationController;
 
@@ -22,7 +24,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $lokasis = Lokasi::paginate(10);
+    $prokers = Proker::paginate(10);
+
+    return view('dashboard', compact('lokasis', 'prokers'));
 })->middleware(['auth'])->name('dashboard');
 
 Route::prefix('map')->group(function () {

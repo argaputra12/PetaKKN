@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow-inner">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow-sm">
     <!-- Primary Navigation Menu -->
     <div class="max-w-[1590px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -12,9 +12,9 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link> --}}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -48,13 +48,15 @@
                             </x-dropdown-link>
                         </form>
                         @endauth
-                        <form method="GET" action='{{ route('login') }}'>
-                            <x-dropdown-link :href="route('login')" onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log In') }}
-                            </x-dropdown-link>
 
-                        </form>
+                        @guest
+                            <form method="GET" action='{{ route('login') }}'>
+                                <x-dropdown-link :href="route('login')" onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{ __('Log In') }}
+                                </x-dropdown-link>
+                            </form>
+                        @endguest
 
                     </x-slot>
                 </x-dropdown>

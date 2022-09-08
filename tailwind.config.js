@@ -19,7 +19,11 @@ module.exports = {
                     blue : '#006EA4',
                     red : '#F66951',
                     cream : '#FFC5A3'
+                },
+                secondary : {
+                    textgray: '#F1F2F6'
                 }
+
             },
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
