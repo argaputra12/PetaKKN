@@ -16,7 +16,7 @@
             <th scope="col" class="px-6 py-3">
                 Status
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th scope="col" class="px-6 py-3 text-center">
                 Aksi
             </th>
         </tr>
@@ -45,8 +45,14 @@
             <td class="px-6 py-4">
                 Pending
             </td>
-            <td class="px-6 py-4">
-                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+            <td class="px-6 py-4 flex justify-center">
+                <button onclick="showData(this)" class="mx-3 p-2 font-bold bg-blue-200 text-blue-600 dark:text-blue-500  rounded-lg w-9 h-9 text-center">
+                    <input type="hidden" name="desa_id" value="{{ $lokasi->desa_id }}">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+                <button  class="mx-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:text-yellow-500 rounded-lg w-9 h-9 text-center">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
             </td>
         </tr>
         @endforeach

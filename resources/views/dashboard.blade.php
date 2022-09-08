@@ -1,6 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden transition duration-150 ease-in-out flex justify-center items-center min-h-[120vh]">
+            <div id="table_data" ></div>
+        </div>
     </x-slot>
 
     <div class="py-12 bg-secondary-textgray mt-[-16px] inset-0 min-h-screen">
@@ -41,10 +43,10 @@
                                             <th scope="col" class="px-6 py-3">
                                                 Kota
                                             </th>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-6 py-3 text-center">
                                                 Status
                                             </th>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-6 py-3 text-center">
                                                 Aksi
                                             </th>
                                         </tr>
@@ -70,11 +72,17 @@
                                                 {{ $lokasi->desa->kota->nama }}
                                             </td>
 
-                                            <td class="px-6 py-4">
-                                                Pending
+                                            <td class="px-6 py-4 text-center">
+                                                <span class="m-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:yellow-blue-500 rounded-lg">Pending</span>
                                             </td>
-                                            <td class="px-6 py-4">
-                                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            <td class="px-6 py-4 flex justify-center">
+                                                <button onclick="showData(this)" class="mx-3 p-2 font-bold bg-blue-200 text-blue-600 dark:text-blue-500  rounded-lg w-9 h-9 text-center">
+                                                    <input type="hidden" name="desa_id" value="{{ $lokasi->desa_id }}">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </button>
+                                                <button  class="mx-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:text-yellow-500 rounded-lg w-9 h-9 text-center">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -104,6 +112,31 @@
                     table_container.innerHTML = response;
                 }
             });
+        }
+
+        const showData = (e) =>{
+
+            const table_data = document.querySelector('.modal-container');
+            table_data.classList.remove('hidden');
+
+            const desa_id = e.children[0].value;
+
+            $.ajax({
+                url: `{{ route('location.show') }}`,
+                type: 'POST',
+                data: {
+                    'desa_id': desa_id,
+                },
+                success: function(data) {
+                    table_data.innerHTML = data;
+                }
+
+            });
+        }
+
+        const closeContainer = () =>{
+            const table_data = document.querySelector('.modal-container');
+            table_data.classList.add('hidden');
         }
     </script>
 </x-app-layout>
