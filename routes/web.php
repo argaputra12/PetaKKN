@@ -25,9 +25,8 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     $lokasis = Lokasi::paginate(10);
-    $prokers = Proker::paginate(10);
 
-    return view('dashboard', compact('lokasis', 'prokers'));
+    return view('dashboard', compact('lokasis'));
 })->middleware(['auth'])->name('dashboard');
 
 Route::prefix('map')->group(function () {
