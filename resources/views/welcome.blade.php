@@ -5,7 +5,7 @@
     {{-- Header --}}
     <x-slot name="header">
         {{-- Background --}}
-        <div class=" absolute w-full left-0 bg-cover bg-center" style="background-image: url({{ asset('img/uns.png') }})">
+        <div class="absolute w-full left-0 bg-cover bg-center min-h-full" style="background-image: url({{ asset('img/uns.png') }})">
             {{-- <img src="{{ asset('img/uns.png') }}" alt="uns-image" class="w-auto sm:w-full sm:bg-center sm:mx-auto left-0 z-0 opacity-60"> --}}
         </div>
 
