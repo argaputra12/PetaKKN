@@ -12,8 +12,11 @@ class Kelompok extends Model
     protected $fillable = [
         'identitas_kelompok',
         'nama_ketua',
-        'link_sosmed'
+        'link_sosmed',
+        'program_telah_jalan',
+        'dokumen_penunjang',
+        'status'
     ];
 
-    
+
 }
