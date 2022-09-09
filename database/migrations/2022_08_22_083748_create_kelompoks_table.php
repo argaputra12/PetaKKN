@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('identitas_kelompok');
             $table->string('nama_ketua')->nullable();
             $table->string('link_sosmed')->nullable();
+            $table->longText('program_telah_jalan')->nullable();
+            $table->string('dokumen_penunjang')->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

@@ -130,9 +130,7 @@ class LocationController extends Controller
         //
 
         $data = Lokasi::where('desa_id', $request->desa_id)->first();
-        $proker = Proker::where('kelompok_id', $data->kelompok_id)->first();
-
-        return view('components.table-data', compact('data', 'proker'));
+        return view('components.table-data', compact('data'));
 
     }
 

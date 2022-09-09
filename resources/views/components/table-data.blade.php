@@ -19,15 +19,25 @@
         @endif
     </div>
     <div class="flex justify-start pl-4">
+        <div class="text-primary-textgray w-32 mb-3">Status</div>
+        @if ($data->kelompok->status == 'pending')
+            <div class="text-yellow-500">{{ ucwords($data->kelompok->status ) }}</div>
+        @elseif ($data->kelompok->status == 'approved')
+            <div class="text-green-500">{{ ucwords($data->kelompok->status ) }}</div>
+        @else
+            <div class="text-red-500">{{ ucwords($data->kelompok->status ) }}</div>
+        @endif
+    </div>
+    <div class="flex justify-start pl-4">
         <div class="text-primary-textgray w-32 mb-6">Dokumentasi</div>
-        @if ($proker->dokumen_penunjang)
-            <div><a href="{{ $proker->dokumen_penunjang }}" class="hover:text-primary-blue">Klik disini</a></div>
+        @if ($data->kelompok->dokumen_penunjang)
+            <div><a href="{{ $data->kelompok->dokumen_penunjang }}" class="hover:text-primary-blue">Klik disini</a></div>
         @endif
     </div>
     <div class="mx-4 border-b border-primary-textgray mb-6 border-opacity-30"></div>
     <div class="flex flex-col justify-start pl-4 mb-4">
         <div class="text-primary-textdark font-semibold mb-3">Program telah berjalan</div>
-        <div class="text-primary-textdark">{{ $proker->program_telah_jalan }}</div>
+        <div class="text-primary-textdark">{{ $data->kelompok->program_telah_jalan }}</div>
     </div>
 </div>
 {{-- <table class="table-fixed text-left border-collapse ">
