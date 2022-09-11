@@ -24,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/map/show', [LocationController::class, 'show'])->name('location.show');
 Route::get('/map/show', [LocationController::class, 'show'])->name('location.show');
 Route::get('/dashboard', [AdminController::class, 'search'])->name('admin.search');
+Route::post('/dashboard/approved', [AdminController::class, 'approved'])->name('admin.approved');
+Route::post('/dashboard/rejected', [AdminController::class, 'rejected'])->name('admin.rejected');

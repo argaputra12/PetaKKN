@@ -9,6 +9,8 @@ use App\Models\Kelompok;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Console\View\Components\Component;
+use PhpParser\Node\Expr\FuncCall;
+use Termwind\Components\Dd;
 
 class AdminController extends Controller
 {
@@ -98,39 +100,59 @@ class AdminController extends Controller
             // Search by kota
             $kota = Kota::where('nama', 'like', '%'.$search.'%')->get('id');
             $desa = Desa::whereIn('kota_id', $kota)->get('id');
-            $lokasi = Lokasi::whereIn('desa_id', $desa)->paginate(10);
-
-            foreach($lokasi as $l) {
-                $lokasis[] = $l;
+            $lokasi = Lokasi::whereIn('desa_id', $desa)->take(10)->get();
+            foreach($lokasi as $l){
+                array_push($lokasis, $l);
             }
 
             // Search by desa
             $desa = Desa::where('nama_desa', 'like', '%'.$search.'%')
                 ->orWhere('nama_kecamatan', 'like', '%'.$search.'%')
                 ->get('id');
-            $lokasi = Lokasi::whereIn('desa_id', $desa)->paginate(10);
-
+            $lokasi = Lokasi::whereIn('desa_id', $desa)->take(10)->get();
             foreach($lokasi as $l){
                 array_push($lokasis, $l);
             }
+
 
             // Search by kelompok
             $identitas_kelompok = Kelompok::where('identitas_kelompok', 'like', '%'.$search.'%')->get('id');
-            $lokasi = Lokasi::whereIn('kelompok_id', $identitas_kelompok)->paginate(10);
-
+            $lokasi = Lokasi::whereIn('kelompok_id', $identitas_kelompok)->take(10)->get();
             foreach($lokasi as $l){
                 array_push($lokasis, $l);
             }
 
-            array_unique($lokasis);
-
+            // check unique lokasis
+            $lokasis = array_unique($lokasis, SORT_REGULAR);
+            // dd($lokasis);
 
             return view('components.admin-dashboard', compact('lokasis'));
 
         }
+    }
 
+    public function approved(Request $request){
+        if($request->ajax()) {
+            // change status to approved
+            $kelompok = Kelompok::find($request->kelompok_id);
+            $kelompok->status = 'approved';
+            $kelompok->save();
+            // dd($kelompok);
 
+            return response()->json(['success' => 'Data is successfully updated']);
+        }
+    }
 
+    public function rejected(Request $request){
+        if($request->ajax()) {
+            // change status to rejected
+            $kelompok = Kelompok::find($request->kelompok_id);
+            $kelompok->status = 'rejected';
+            $kelompok->save();
+            // dd($kelompok);
+
+            return response()->json(['success' => 'Data is successfully updated']);
+        }
     }
 }
 
