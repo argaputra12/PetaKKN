@@ -73,16 +73,29 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center">
-                                                <span class="m-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:yellow-blue-500 rounded-lg">Pending</span>
+                                                @if ($lokasi->kelompok->status == 'pending')
+                                                    <span class="m-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:yellow-blue-500 rounded-lg">Pending</span>
+                                                @elseif($lokasi->kelompok->status == 'approved')
+                                                    <span class="m-3 p-2 font-small bg-green-200 text-green-600 dark:yellow-blue-500 rounded-lg">Approved</span>
+                                                @elseif($lokasi->kelompok->status == 'rejected')
+                                                    <span class="m-3 p-2 font-small bg-red-200 text-red-600 dark:yellow-blue-500 rounded-lg">Rejected</span>
+
+                                                @endif
                                             </td>
                                             <td class="px-6 py-4 flex justify-center">
                                                 <button onclick="showData(this)" class="mx-3 p-2 font-bold bg-blue-200 text-blue-600 dark:text-blue-500  rounded-lg w-9 h-9 text-center">
                                                     <input type="hidden" name="desa_id" value="{{ $lokasi->desa_id }}">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </button>
-                                                <button  class="mx-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:text-yellow-500 rounded-lg w-9 h-9 text-center">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                <button class="mx-3 p-2 font-small bg-green-200 text-green-600 dark:text-green-500 rounded-lg w-9 h-9 text-center" onclick="approvedKkn(this)">
+                                                    <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
+                                                    <i class="fa-solid fa-check"></i>
                                                 </button>
+                                                <button  class="mx-3 p-2 font-small bg-red-200 text-red-600 dark:text-red-500 rounded-lg w-9 h-9 text-center" onclick="rejectedKkn(this)">
+                                                    <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </button>
+
                                             </td>
                                         </tr>
                                         @endforeach
@@ -102,14 +115,17 @@
     <script>
         const searchData = (value) => {
             const table_container = document.querySelector('#table-container');
-            console.log(value);
             $.ajax({
                 url: '{{ route('admin.search') }}',
                 type: 'get',
                 data: { search: value },
                 success: function(response)
                 {
+
+                    table_container.innerHTML = '';
                     table_container.innerHTML = response;
+                    console.log(response);
+
                 }
             });
         }
@@ -137,6 +153,45 @@
         const closeContainer = () =>{
             const table_data = document.querySelector('.modal-container');
             table_data.classList.add('hidden');
+        }
+
+        const approvedKkn = (e) =>{
+            const kelompok_id = e.children[0].value;
+            const row = e.parentElement.parentElement;
+            const status_column = row.children[4];
+            $.ajax({
+                url: `{{ route('admin.approved') }}`,
+                type: 'POST',
+                data: {
+                    'kelompok_id': kelompok_id,
+                },
+                success: function(data) {
+                    alert(data.success);
+                    // reload page
+                    status_column.innerHTML = `<span class="m-3 p-2 font-small bg-green-200 text-green-600 dark:yellow-blue-500 rounded-lg">Approved</span>`;
+                }
+
+            });
+        }
+
+        const rejectedKkn = (e) =>{
+            const kelompok_id = e.children[0].value;
+            const row = e.parentElement.parentElement;
+            const status_column = row.children[4];
+
+            $.ajax({
+                url: `{{ route('admin.rejected') }}`,
+                type: 'POST',
+                data: {
+                    'kelompok_id': kelompok_id,
+                },
+                success: function(data) {
+                    alert(data.success);
+                    // reload page
+                    status_column.innerHTML = `<span class="m-3 p-2 font-small bg-red-200 text-red-600 dark:yellow-blue-500 rounded-lg">Rejected</span>`;
+                }
+
+            });
         }
     </script>
 </x-app-layout>
