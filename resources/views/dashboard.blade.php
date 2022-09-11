@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden transition duration-150 ease-in-out flex justify-center items-center min-h-[120vh]">
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden transition duration-150 ease-in-out flex justify-center items-center min-h-[113vh]">
             <div id="table_data" ></div>
         </div>
     </x-slot>
