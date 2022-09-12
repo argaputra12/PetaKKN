@@ -60,6 +60,10 @@
                     <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
                     <i class="fa-solid fa-check"></i>
                 </button>
+                <button  class="mx-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:text-yellow-500 rounded-lg w-9 h-9 text-center" onclick="pendingKkn(this)">
+                    <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
+                    <i class="fa-solid fa-exclamation"></i>
+                </button>
                 <button  class="mx-3 p-2 font-small bg-red-200 text-red-600 dark:text-red-500 rounded-lg w-9 h-9 text-center" onclick="rejectedKkn(this)">
                     <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
                     <i class="fa-solid fa-xmark"></i>

@@ -26,3 +26,4 @@ Route::get('/map/show', [LocationController::class, 'show'])->name('location.sho
 Route::get('/dashboard', [AdminController::class, 'search'])->name('admin.search');
 Route::post('/dashboard/approved', [AdminController::class, 'approved'])->name('admin.approved');
 Route::post('/dashboard/rejected', [AdminController::class, 'rejected'])->name('admin.rejected');
+Route::post('/dashboard/pending', [AdminController::class, 'pending'])->name('admin.pending');

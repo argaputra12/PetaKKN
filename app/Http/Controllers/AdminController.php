@@ -154,5 +154,17 @@ class AdminController extends Controller
             return response()->json(['success' => 'Data is successfully updated']);
         }
     }
+
+    public function pending(Request $request){
+        if($request->ajax()) {
+            // change status to pending
+            $kelompok = Kelompok::find($request->kelompok_id);
+            $kelompok->status = 'pending';
+            $kelompok->save();
+            // dd($kelompok);
+
+            return response()->json(['success' => 'Data is successfully updated']);
+        }
+    }
 }
 
