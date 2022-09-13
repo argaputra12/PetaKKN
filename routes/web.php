@@ -4,6 +4,7 @@ use App\Models\Kota;
 use App\Models\Lokasi;
 use App\Models\Proker;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LocationController;
 
 /*
@@ -33,5 +34,8 @@ Route::prefix('map')->group(function () {
     Route::post('/', [LocationController::class, 'index'])->name('location.index');
 
 });
+
+Route::get('/dashboard/export', [AdminController::class, 'export'])->name('admin.export');
+Route::get('/dashboard/export_all', [AdminController::class, 'exportAll'])->name('admin.export.all');
 
 require __DIR__.'/auth.php';

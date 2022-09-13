@@ -6,11 +6,14 @@ use App\Models\Desa;
 use App\Models\Kota;
 use App\Models\Lokasi;
 use App\Models\Kelompok;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Illuminate\Console\View\Components\Component;
-use PhpParser\Node\Expr\FuncCall;
 use Termwind\Components\Dd;
+use Illuminate\Http\Request;
+use App\Exports\LokasiExport;
+use App\Exports\LokasiAllExport;
+use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Routing\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Console\View\Components\Component;
 
 class AdminController extends Controller
 {
@@ -166,5 +169,19 @@ class AdminController extends Controller
             return response()->json(['success' => 'Data is successfully updated']);
         }
     }
-}
 
+    public function export(Request $request){
+        // $data = array();
+        // foreach($request->lokasi_id as $lokasi_id){
+        //     $lokasi = Lokasi::find($lokasi_id);
+        //     array_push($data, $lokasi);
+        // }
+        return Excel::download(new LokasiExport($request->lokasi_id), 'dataKknTable.xlsx');
+
+    }
+
+    public function exportAll(){
+        $data = Lokasi::get('id');
+        return Excel::download(new LokasiAllExport($data), 'dataKknTableAll.xlsx');
+    }
+}
