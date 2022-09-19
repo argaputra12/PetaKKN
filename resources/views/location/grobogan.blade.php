@@ -7,7 +7,7 @@
         <div class="container flex  mx-auto mb-6 border-2">
             <div id="map" style="width:100%" class="w-full z-10" ></div>
         </div>
-        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden min-h-[102vh mt-16 flex justify-center items-center">
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden flex min-h-[102vh mt-16 flex justify-center items-center">
             <div id="table_data" ></div>
         </div>
 
