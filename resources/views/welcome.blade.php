@@ -1,7 +1,5 @@
 <x-app-layout>
 
-
-
     {{-- Header --}}
     <x-slot name="header">
         {{-- Background --}}
@@ -35,10 +33,7 @@
 
     </x-slot>
 
-
     {{-- Jumbotron --}}
-
-
 
     <script>
         const scrollToLokasi = () => {

@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-center font-semibold text-5xl text-primary-textlight my-14">
+        <h2 class="text-center font-semibold text-5xl text-primary-textdark my-14 font-poppins">
             Pemetaan Kelompok KKN Kabupaten Boyolali
         </h2>
 
-        <div class="container flex  mx-auto mb-6">
+        <div class="container flex  mx-auto mb-6 border-2">
             <div id="map" style="width:100%" class="w-full z-10" ></div>
         </div>
-        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden min-h-[102vh] mt-16 flex justify-center items-center">
             <div id="table_data" ></div>
         </div>
 
@@ -212,9 +212,9 @@
                 .bindPopup(`<div class="flex flex-col py-2">
                         <div class="flex justify-center">
                             <div class="font-semibold">KKN DESA ${desa[i][0]}
-                            <br> 
+                            <br>
                             <p>Status : </p>
-                            </div> 
+                            </div>
                         </div>
                         <button class="bg-blue-500 rounded-md font-semibold text-white w-20 h-6 mt-4 mx-auto" onclick="showData(this)">
                             <input type="hidden" name="desa_id" value="${desa[i][3]}">
