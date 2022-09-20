@@ -15,7 +15,7 @@
     <div class="flex justify-start pl-4">
         <div class="text-primary-textgray w-32 mb-3">Sosial media</div>
         @if ($data->kelompok->link_sosmed)
-            <div><a href="{{ $data->kelompok->link_sosmed }}" class="hover:text-primary-blue">Klik disini</a></div>
+            <div><a href="{{ $data->kelompok->link_sosmed }}" target="_blank" class="hover:text-primary-blue">Klik disini</a></div>
         @endif
     </div>
     <div class="flex justify-start pl-4">
@@ -31,7 +31,7 @@
     <div class="flex justify-start pl-4">
         <div class="text-primary-textgray w-32 mb-6">Dokumentasi</div>
         @if ($data->kelompok->dokumen_penunjang)
-            <div><a href="{{ $data->kelompok->dokumen_penunjang }}" class="hover:text-primary-blue">Klik disini</a></div>
+            <div><a href="{{ $data->kelompok->dokumen_penunjang }}" target="_blank" class="hover:text-primary-blue">Klik disini</a></div>
         @endif
     </div>
     <div class="mx-4 border-b border-primary-textgray mb-6 border-opacity-30"></div>

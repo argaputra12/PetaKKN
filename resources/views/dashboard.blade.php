@@ -24,91 +24,101 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input type="text" id="table-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  " placeholder="Search for items" onkeyup="searchData(this.value)">
+                                <input type="text" id="table-search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  " placeholder="Search for items" onkeyup="searchData(this.value)">
+                            </div>
                         </div>
-                            </div>
-                            <div id="table-container">
-                                <table class="w-full text-sm text-left text-primary-textdark ">
-                                    <thead class="text-base border-b">
-                                        <tr>
-                                            <th scope="col" class="px-6 py-3">
-                                                Kelompok
-                                            </th>
-                                            <th scope="col" class="px-6 py-3">
-                                                Desa
-                                            </th>
-                                            <th scope="col" class="px-6 py-3">
-                                                Kecamatan
-                                            </th>
-                                            <th scope="col" class="px-6 py-3">
-                                                Kota
-                                            </th>
-                                            <th scope="col" class="px-6 py-3 text-center">
-                                                Status
-                                            </th>
-                                            <th scope="col" class="px-6 py-3 text-center">
-                                                Aksi
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($lokasis as $index=>$lokasi)
+                            <form action="{{ route('admin.export') }}" method="GET" enctype="multipart/form-data">
+                                <div id="table-container">
+                                    <table class="w-full text-sm text-left text-primary-textdark ">
+                                        <thead class="text-base border-b">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Kelompok
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Desa
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Kecamatan
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Kota
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-center">
+                                                    Status
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-center">
+                                                    Aksi
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($lokasis as $index=>$lokasi)
 
-                                        <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 hover:text-primary-textlight">
-                                            <td class=" px-6 py-4">
-                                                <div class="flex items-center text-sm">
-                                                    <div>
-                                                        <p class="font-semibold">Kelompok {{ $lokasi->kelompok->identitas_kelompok }}</p>
+                                            <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 hover:text-primary-textlight">
+                                                <input type="hidden" name="lokasi_id[]" value="{{ $lokasi->id }}">
+                                                <td class=" px-6 py-4">
+                                                    <div class="flex items-center text-sm">
+                                                        <div>
+                                                            <p class="font-semibold">Kelompok {{ $lokasi->kelompok->identitas_kelompok }}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td scope="row" class="px-6 py-4">
-                                                Desa {{ ucwords(strtolower($lokasi->desa->nama_desa)) }}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                Kecamatan {{ ucwords(strtolower($lokasi->desa->nama_kecamatan))}}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{ $lokasi->desa->kota->nama }}
-                                            </td>
+                                                </td>
+                                                <td scope="row" class="px-6 py-4">
+                                                    Desa {{ ucwords(strtolower($lokasi->desa->nama_desa)) }}
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    Kecamatan {{ ucwords(strtolower($lokasi->desa->nama_kecamatan))}}
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    {{ $lokasi->desa->kota->nama }}
+                                                </td>
 
-                                            <td class="px-6 py-4 text-center">
-                                                @if ($lokasi->kelompok->status == 'pending')
-                                                    <span class="m-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:yellow-blue-500 rounded-lg">Pending</span>
-                                                @elseif($lokasi->kelompok->status == 'approved')
-                                                    <span class="m-3 p-2 font-small bg-green-200 text-green-600 dark:yellow-blue-500 rounded-lg">Approved</span>
-                                                @elseif($lokasi->kelompok->status == 'rejected')
-                                                    <span class="m-3 p-2 font-small bg-red-200 text-red-600 dark:yellow-blue-500 rounded-lg">Rejected</span>
+                                                <td class="px-6 py-4 text-center">
+                                                    @if ($lokasi->kelompok->status == 'pending')
+                                                        <span class="m-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:yellow-blue-500 rounded-lg">Pending</span>
+                                                    @elseif($lokasi->kelompok->status == 'approved')
+                                                        <span class="m-3 p-2 font-small bg-green-200 text-green-600 dark:yellow-blue-500 rounded-lg">Approved</span>
+                                                    @elseif($lokasi->kelompok->status == 'rejected')
+                                                        <span class="m-3 p-2 font-small bg-red-200 text-red-600 dark:yellow-blue-500 rounded-lg">Rejected</span>
 
-                                                @endif
-                                            </td>
-                                            <td class="px-6 py-4 flex justify-center">
-                                                <button onclick="showData(this)" class="mx-3 p-2 font-bold bg-blue-200 text-blue-600 dark:text-blue-500  rounded-lg w-9 h-9 text-center">
-                                                    <input type="hidden" name="desa_id" value="{{ $lokasi->desa_id }}">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                                <button class="mx-3 p-2 font-small bg-green-200 text-green-600 dark:text-green-500 rounded-lg w-9 h-9 text-center" onclick="approvedKkn(this)">
-                                                    <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
-                                                    <i class="fa-solid fa-check"></i>
-                                                </button>
-                                                <button  class="mx-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:text-yellow-500 rounded-lg w-9 h-9 text-center" onclick="pendingKkn(this)">
-                                                    <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
-                                                    <i class="fa-solid fa-exclamation"></i>
-                                                </button>
-                                                <button  class="mx-3 p-2 font-small bg-red-200 text-red-600 dark:text-red-500 rounded-lg w-9 h-9 text-center" onclick="rejectedKkn(this)">
-                                                    <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
-                                                    <i class="fa-solid fa-xmark"></i>
-                                                </button>
-
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <div class="w-full p-4">
-                                    {{ $lokasis->links() }}
+                                                    @endif
+                                                </td>
+                                                <td class="px-6 py-4 flex justify-center">
+                                                    <button type="button" onclick="showData(this)" class="mx-3 p-2 font-bold bg-blue-200 text-blue-600 dark:text-blue-500  rounded-lg w-9 h-9 text-center">
+                                                        <input type="hidden" name="desa_id" value="{{ $lokasi->desa_id }}">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                    </button>
+                                                    <button type="button" class="mx-3 p-2 font-small bg-green-200 text-green-600 dark:text-green-500 rounded-lg w-9 h-9 text-center" onclick="approvedKkn(this)">
+                                                        <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
+                                                        <i class="fa-solid fa-check"></i>
+                                                    </button>
+                                                    <button type="button" class="mx-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:text-yellow-500 rounded-lg w-9 h-9 text-center" onclick="pendingKkn(this)">
+                                                        <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
+                                                        <i class="fa-solid fa-exclamation"></i>
+                                                    </button>
+                                                    <button type="button" class="mx-3 p-2 font-small bg-red-200 text-red-600 dark:text-red-500 rounded-lg w-9 h-9 text-center" onclick="rejectedKkn(this)">
+                                                        <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <div class="w-full p-4">
+                                        {{ $lokasis->links() }}
+                                    </div>
                                 </div>
-                            </div>
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg absolute right-[11rem] bottom-[1rem]" type="submit">
+                                    Export
+                                </button>
+                            </form>
+                            <form action="{{ route('admin.export.all') }}" method="get" enctype="multipart/form-data">
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg absolute right-[2rem] bottom-[1rem]">
+                                    Export All
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -117,6 +127,32 @@
     </div>
     <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
     <script>
+        const exportDataTable = () =>{
+            const input = document.getElementsByName('lokasi_id[]');
+            const data = [];
+            for(let i=0; i<input.length; i++){
+                data.push(input[i].value);
+            }
+
+            $.ajax({
+                url: "{{ route('admin.export') }}",
+                type: "get",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    data: data
+                },
+                success: function(response){
+                    // download excel
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'data.xlsx';
+                    document.body.appendChild(a);
+                    a.click();
+                },
+            })
+        }
+
         const searchData = (value) => {
             const table_container = document.querySelector('#table-container');
             $.ajax({
@@ -162,7 +198,7 @@
         const approvedKkn = (e) =>{
             const kelompok_id = e.children[0].value;
             const row = e.parentElement.parentElement;
-            const status_column = row.children[4];
+            const status_column = row.children[5];
             $.ajax({
                 url: `{{ route('admin.approved') }}`,
                 type: 'POST',
@@ -181,7 +217,7 @@
         const rejectedKkn = (e) =>{
             const kelompok_id = e.children[0].value;
             const row = e.parentElement.parentElement;
-            const status_column = row.children[4];
+            const status_column = row.children[5];
 
             $.ajax({
                 url: `{{ route('admin.rejected') }}`,
@@ -201,7 +237,7 @@
         const pendingKkn = (e) =>{
             const kelompok_id = e.children[0].value;
             const row = e.parentElement.parentElement;
-            const status_column = row.children[4];
+            const status_column = row.children[5];
 
             $.ajax({
                 url: `{{ route('admin.pending') }}`,

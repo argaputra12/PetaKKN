@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-center font-semibold text-5xl text-primary-textlight my-14">
+        <h2 class="text-center font-semibold text-5xl text-primary-textdark font-poppins my-14">
             Pemetaan Kelompok KKN Kabupaten Sragen
         </h2>
 
-        <div class="container flex  mx-auto mb-6">
+        <div class="border-2 container flex  mx-auto mb-6">
             <div id="map" style="width:100%" class="w-full z-10" ></div>
         </div>
-        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden h-screen mt-16 flex justify-center items-center">
+        <div class="modal-container absolute bg-black bg-opacity-50 inset-0 z-[999] hidden min-h-[102vh] mt-16 flex justify-center items-center">
             <div id="table_data" ></div>
         </div>
 

@@ -4,7 +4,8 @@ var Magelang = {
       {
         "type": "Feature",
         "properties": {
-          "KECAMATAN": "BOROBUDUR"
+          "KECAMATAN": "BOROBUDUR",
+          "Jumlah" : 6
         },
         "geometry": {
           "type": "MultiPolygon",
@@ -3627,7 +3628,8 @@ var Magelang = {
       {
         "type": "Feature",
         "properties": {
-          "KECAMATAN": "MERTOYUDAN"
+          "KECAMATAN": "MERTOYUDAN",
+          "Jumlah": 4,
         },
         "geometry": {
           "type": "MultiPolygon",
@@ -7156,7 +7158,8 @@ var Magelang = {
       {
         "type": "Feature",
         "properties": {
-          "KECAMATAN": "MUNGKID"
+          "KECAMATAN": "MUNGKID",
+          "Jumlah": 1
         },
         "geometry": {
           "type": "MultiPolygon",
@@ -10669,7 +10672,8 @@ var Magelang = {
       {
         "type": "Feature",
         "properties": {
-          "KECAMATAN": "MUNTILAN"
+          "KECAMATAN": "MUNTILAN",
+          "Jumlah": 4
         },
         "geometry": {
           "type": "MultiPolygon",
@@ -12968,7 +12972,8 @@ var Magelang = {
       {
         "type": "Feature",
         "properties": {
-          "KECAMATAN": "SALAM"
+          "KECAMATAN": "SALAM",
+          "Jumlah": 4
         },
         "geometry": {
           "type": "MultiPolygon",
@@ -16187,7 +16192,8 @@ var Magelang = {
       {
         "type": "Feature",
         "properties": {
-          "KECAMATAN": "SALAMAN"
+          "KECAMATAN": "SALAMAN",
+          "Jumlah" : 5
         },
         "geometry": {
           "type": "MultiPolygon",
@@ -22422,7 +22428,8 @@ var Magelang = {
       {
         "type": "Feature",
         "properties": {
-          "KECAMATAN": "TEMPURAN"
+          "KECAMATAN": "TEMPURAN",
+          "Jumlah": 1
         },
         "geometry": {
           "type": "MultiPolygon",

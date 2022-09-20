@@ -25,6 +25,7 @@
         @foreach ($lokasis as $index=>$lokasi)
 
         <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 hover:text-primary-textlight">
+            <input type="hidden" name="lokasi_id[]" value="{{ $lokasi->id }}">
             <td class=" px-6 py-4">
                 <div class="flex items-center text-sm">
                     <div>
@@ -52,19 +53,19 @@
                 @endif
             </td>
             <td class="px-6 py-4 flex justify-center">
-                <button onclick="showData(this)" class="mx-3 p-2 font-bold bg-blue-200 text-blue-600 dark:text-blue-500  rounded-lg w-9 h-9 text-center">
+                <button type="button" onclick="showData(this)" class="mx-3 p-2 font-bold bg-blue-200 text-blue-600 dark:text-blue-500  rounded-lg w-9 h-9 text-center">
                     <input type="hidden" name="desa_id" value="{{ $lokasi->desa_id }}">
                     <i class="fa-solid fa-eye"></i>
                 </button>
-                <button class="mx-3 p-2 font-small bg-green-200 text-green-600 dark:text-green-500 rounded-lg w-9 h-9 text-center" onclick="approvedKkn(this)">
+                <button type="button" class="mx-3 p-2 font-small bg-green-200 text-green-600 dark:text-green-500 rounded-lg w-9 h-9 text-center" onclick="approvedKkn(this)">
                     <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
                     <i class="fa-solid fa-check"></i>
                 </button>
-                <button  class="mx-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:text-yellow-500 rounded-lg w-9 h-9 text-center" onclick="pendingKkn(this)">
+                <button type="button" class="mx-3 p-2 font-small bg-yellow-200 text-yellow-600 dark:text-yellow-500 rounded-lg w-9 h-9 text-center" onclick="pendingKkn(this)">
                     <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
                     <i class="fa-solid fa-exclamation"></i>
                 </button>
-                <button  class="mx-3 p-2 font-small bg-red-200 text-red-600 dark:text-red-500 rounded-lg w-9 h-9 text-center" onclick="rejectedKkn(this)">
+                <button type="button" class="mx-3 p-2 font-small bg-red-200 text-red-600 dark:text-red-500 rounded-lg w-9 h-9 text-center" onclick="rejectedKkn(this)">
                     <input type="hidden" name="kelompok_id" value="{{ $lokasi->kelompok_id }}">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -73,3 +74,6 @@
         @endforeach
     </tbody>
 </table>
+<div class="w-full h-[70px]">
+
+</div>
